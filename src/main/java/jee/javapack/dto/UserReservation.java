@@ -1,28 +1,23 @@
-package jee.javapack.beans;
+package jee.javapack.dto;
 
 import java.sql.Time;
 import java.util.Date;
 
-public class Reservation {
+public class UserReservation {
     private Integer idReservation;
     private Integer idUser;
     private Integer idFilm;
-    private Integer qrCodeBillet;
-    private String seatPlace;
-    private String experienceType;
-    private String offerBillet;
+    private String userName;
+    private String userMail;
     private Date dateReservation;
     private Time timeReservation;
 
-
-    public Reservation(Integer idReservation, Integer idUser, Integer idFilm, Integer qrCodeBillet, String seatPlace, String ExperienceType, String offerBillet, Date dateReservation, Time timeReservation) {
+    public UserReservation(Integer idReservation, Integer idUser, Integer idFilm, String userName, String userMail, Date dateReservation, Time timeReservation) {
         this.idReservation = idReservation;
         this.idUser = idUser;
         this.idFilm = idFilm;
-        this.qrCodeBillet = qrCodeBillet;
-        this.seatPlace = seatPlace;
-        this.experienceType = ExperienceType;
-        this.offerBillet = offerBillet;
+        this.userName = userName;
+        this.userMail = userMail;
         this.dateReservation = dateReservation;
         this.timeReservation = timeReservation;
     }
@@ -51,36 +46,20 @@ public class Reservation {
         this.idFilm = idFilm;
     }
 
-    public Integer getQrCodeBillet() {
-        return qrCodeBillet;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setQrCodeBillet(Integer qrCodeBillet) {
-        this.qrCodeBillet = qrCodeBillet;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getSeatPlace() {
-        return seatPlace;
+    public String getUserMail() {
+        return userMail;
     }
 
-    public void setSeatPlace(String seatPlace) {
-        this.seatPlace = seatPlace;
-    }
-
-    public String getExperienceType() {
-        return experienceType;
-    }
-
-    public void setExperienceType(String ExperienceType) {
-        experienceType = ExperienceType;
-    }
-
-    public String getOfferBillet() {
-        return offerBillet;
-    }
-
-    public void setOfferBillet(String offerBillet) {
-        this.offerBillet = offerBillet;
+    public void setUserMail(String userMail) {
+        this.userMail = userMail;
     }
 
     public Date getDateReservation() {
