@@ -1,23 +1,14 @@
-<%@ page import="jee.javapack.beans.Film" %>
-<%@ page import="jee.javapack.dao.FilmDAOImpl" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 26/04/2024
-  Time: 16:26
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title> Admin </title>
+    <title>DarkPan - Bootstrap 5 Admin Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
+
 
 
     <!-- Icon Font Stylesheet -->
@@ -25,16 +16,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-
-    <style><%@ include file="lib/owlcarousel/assets/owl.carousel.min.css"%></style>
-
-    <style><%@ include file="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css"%></style>
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <style><%@include file="lib/owlcarousel/assets/owl.carousel.min.css"%></style>
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <style><%@include file="lib/owlcarousel/assets/owl.carousel.min.css"%></style>
     <!-- Customized Bootstrap Stylesheet -->
-
-    <style><%@ include file="css/bootstrap.min.css"%></style>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style><%@include file="lib/owlcarousel/assets/owl.carousel.min.css"%></style>
     <!-- Template Stylesheet -->
-
-    <style><%@ include file="css/style.css"%></style>
+    <link href="css/style.css" rel="stylesheet">
+    <style><%@include file="lib/owlcarousel/assets/owl.carousel.min.css"%></style>
 </head>
 
 <body>
@@ -90,7 +81,7 @@
             <a href="#" class="sidebar-toggler flex-shrink-0">
                 <i class="fa fa-bars"></i>
             </a>
-            <form class="d-none d-md-flex ms-4" action="">
+            <form class="d-none d-md-flex ms-4" >
                 <input class="form-control bg-dark border-0" type="search" placeholder="Search">
             </form>
             <div class="navbar-nav align-items-center ms-auto">
@@ -173,133 +164,69 @@
         <!-- Navbar End -->
 
 
-        <!-- Sale & Revenue Start -->
-        <div class="container-fluid pt-4 px-4">
-            <div class="row g-4">
-                <div class="col-sm-6 col-xl-3">
-                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                        <i class="fa fa-chart-line fa-3x text-primary"></i>
-                        <div class="ms-3">
-                            <p class="mb-2">Today Sale</p>
-                            <h6 class="mb-0">$1234</h6>
-                        </div>
+        <!-- Form Start -->
+        <div class="bg-secondary rounded h-100 p-4 d-flex justify-content-center align-items-center">
+            <div class="col-sm-12 col-xl-6">
+                <h6 class="mb-4">Edit Film</h6>
+                <form action="UpDateFilms" method="post">
+                    <input type="hidden" name="idFilm" value="${film.getIdFilm()}">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="titleFilm" name="titleFilm" value="${film.getTitleFilm()}">
+                        <label for="titleFilm">Titre du film</label>
                     </div>
-                </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                        <i class="fa fa-chart-bar fa-3x text-primary"></i>
-                        <div class="ms-3">
-                            <p class="mb-2">Total Sale</p>
-                            <h6 class="mb-0">$1234</h6>
-                        </div>
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" id="descriptionFilm" name="descriptionFilm" style="height: 150px;">${film.getDescriptionFilm()}</textarea>
+                        <label for="descriptionFilm">Description du film</label>
                     </div>
-                </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                        <i class="fa fa-chart-area fa-3x text-primary"></i>
-                        <div class="ms-3">
-                            <p class="mb-2">Today Revenue</p>
-                            <h6 class="mb-0">$1234</h6>
-                        </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="runTimeFilm" name="runTimeFilm" value="${film.getRunTimeFilm()}">
+                        <label for="runTimeFilm">Durée du film</label>
                     </div>
-                </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                        <i class="fa fa-chart-pie fa-3x text-primary"></i>
-                        <div class="ms-3">
-                            <p class="mb-2">Total Revenue</p>
-                            <h6 class="mb-0">$1234</h6>
-                        </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="genreFilm" name="genreFilm" value="${film.getGenreFilm()}">
+                        <label for="genreFilm">Genre du film</label>
                     </div>
-                </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="producedIn" name="producedIn" value="${film.getProducedIn()}">
+                        <label for="producedIn">Produit en</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="directedBy" name="directedBy" value="${film.getDirectedBy()}">
+                        <label for="directedBy">Dirigé par</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="pictureURL" name="pictureURL" value="${film.getPictureURL()}">
+                        <label for="pictureURL">URL de l'image</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="streamingNow" name="streamingNow" value="${film.getStreamingNow()}">
+                        <label for="streamingNow">Diffusion en continu (Dates)</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="ratingFilm" name="ratingFilm" value="${film.getRatingFilm()}">
+                        <label for="ratingFilm">Classification du film</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="backgroundURL" name="backgroundURL" value="${film.getBackgroundURL()}">
+                        <label for="backgroundURL">URL de l'arrière-plan</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" value="UpDateFilm" > Edit </button>
+                </form>
             </div>
         </div>
-        <!-- Sale & Revenue End -->
 
 
-        <!-- Sales Chart Start -->
-        <div class="container-fluid pt-4 px-4">
-            <div class="row g-4">
-                <div class="col-sm-12 col-xl-6">
-                    <div class="bg-secondary text-center rounded p-4">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h6 class="mb-0">Worldwide Sales</h6>
-                            <a href="">Show All</a>
-                        </div>
-                        <canvas id="worldwide-sales"></canvas>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-xl-6">
-                    <div class="bg-secondary text-center rounded p-4">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h6 class="mb-0">Salse & Revenue</h6>
-                            <a href="">Show All</a>
-                        </div>
-                        <canvas id="salse-revenue"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Sales Chart End -->
 
 
-        <!-- Recent Sales Start -->
-        <div class="container-fluid pt-4 px-4">
-            <div class="bg-secondary text-center rounded p-4">
-                <div class="d-flex align-items-center justify-content-between mb-4">
-                    <h6 class="mb-0">Recent Salse</h6>
-                    <a href="addFilm.jsp">Add Movie</a>
-                </div>
-                <div class="table-responsive">
-                    <table class="table text-start align-middle table-bordered table-hover mb-0">
-                        <thead>
-                        <tr class="text-white">
-                            <th scope="col">Title</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Runtime</th>
-                            <th scope="col">Genre</th>
-                            <th scope="col">Produced In</th>
-                            <th scope="col">Directed By</th>
-                            <th scope="col">Picture</th>
-                            <th scope="col">Background</th>
-                            <th scope="col">Rating</th>
-                            <th scope="col">Streaming Now</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach var="show" items="${shows}">
-                            <tr>
+        <!-- Form End -->
 
-                                <td>${show.getTitleFilm()}</td>
-                                <td>${show.getDescriptionFilm()}</td>
-                                <td>${show.getRunTimeFilm()}</td>
-                                <td>${show.getGenreFilm()}</td>
-                                <td>${show.getProducedIn()}</td>
-                                <td>${show.getDirectedBy()}</td>
-                                <td>${show.getPictureURL()}</td>
-                                <td>${show.getBackgroundURL()}</td>
-                                <td>${show.getRatingFilm()}</td>
-                                <td>${show.getStreamingNow()}</td>
 
-                                <td>
-                                        <a href="UpDateFilms?id=${show.getIdFilm()}" class="btn btn-primary">Update</a>
-                                        <a href="DeleteFilm?idFilm=${show.getIdFilm()}" class="btn btn-primary">Delete</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <!-- Recent Sales End -->
         <!-- Footer Start -->
         <div class="container-fluid pt-4 px-4">
             <div class="bg-secondary rounded-top p-4">
                 <div class="row">
                     <div class="col-12 col-sm-6 text-center text-sm-start">
-                         <a href="#">Your Site Name</a>, All Right Reserved.
+                        &copy; <a href="#">Your Site Name</a>, All Right Reserved.
                     </div>
 
                 </div>
@@ -318,25 +245,21 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<script><%@ include file="lib/easing/easing.min.js"%></script>
-
-<script><%@ include file="lib/waypoints/waypoints.min.js"%></script>
-
-
-
-
-<script><%@ include file="lib/tempusdominus/js/moment.min.js"%></script>
-
-
-<script><%@ include file="lib/tempusdominus/js/moment-timezone.min.js"%></script>
-
-
-<script><%@ include file="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"%></script>
-
+<script src="lib/easing/easing.min.js"></script>
+<style><%@include file="lib/easing/easing.min.js"%></style>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<style><%@include file="lib/waypoints/waypoints.min.js"%></style>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<style><%@include file="lib/owlcarousel/owl.carousel.min.js"%></style>
+<script src="lib/tempusdominus/js/moment.min.js"></script>
+<style><%@include file="lib/tempusdominus/js/moment.min.js"%></style>
+<script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+<style><%@include file="lib/tempusdominus/js/moment-timezone.min.js"%></style>
+<script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+<style><%@include file="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"%></style>
 
 <!-- Template Javascript -->
-
-<script><%@ include file="js/main.js"%></script>
+<script src="js/main.js"></script>
 </body>
 
 </html>

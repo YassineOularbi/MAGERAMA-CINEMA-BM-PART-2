@@ -33,6 +33,7 @@ public class Login extends HttpServlet {
         System.out.println("Login Attempt: Email - " + login + ", Password - " + password);
         if (user != null) {
             session.setAttribute("login", login);
+
             String role = user.getRole();
             if ("admin".equals(role)) {
                 FilmDAOImpl show=new FilmDAOImpl();
@@ -44,7 +45,8 @@ public class Login extends HttpServlet {
                 }
                 this.getServletContext().getRequestDispatcher("/Admin.jsp").forward(request, response);
             } else {
-
+                session.setAttribute("id", user.getId());
+                session.getAttribute("id");
                 List<Film> ratingFilms = filmDAO.getHighRatedFilms();
                 request.setAttribute("ratingFilms", ratingFilms);
                 request.setAttribute("trendFilms", ratingFilms);

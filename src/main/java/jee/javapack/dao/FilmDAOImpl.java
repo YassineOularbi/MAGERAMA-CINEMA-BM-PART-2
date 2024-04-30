@@ -151,8 +151,6 @@ public class FilmDAOImpl implements FilmDAO {
         return SearchFilmsRe;
     }
 
-
-
     @Override
     public void addFilms(Film film) throws SQLException {
         Connection connection = ConnectionDAO.getConnection();
@@ -206,17 +204,18 @@ public class FilmDAOImpl implements FilmDAO {
         Connection connection = ConnectionDAO.getConnection();
         String sql = "UPDATE film SET titleFilm=?, descriptionFilm=?, runTimeFilm=?, genreFilm=?, producedIn=?, directedBy=?, pictureURL=?, ratingFilm=?, backgroundURL=?, streamingNow=? WHERE idFilm=?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, film.getIdFilm());
-            statement.setString(2, film.getTitleFilm());
-            statement.setString(3, film.getDescriptionFilm());
-            statement.setString(4, film.getRunTimeFilm());
-            statement.setString(5, film.getGenreFilm());
-            statement.setDate(6, film.getProducedIn());
-            statement.setString(7, film.getDirectedBy());
-            statement.setString(8, film.getPictureURL());
-            statement.setString(9, film.getRatingFilm());
-            statement.setString(10, film.getBackgroundURL());
-            statement.setString(11, film.getStreamingNow());
+
+            statement.setString(1, film.getTitleFilm());
+            statement.setString(2, film.getDescriptionFilm());
+            statement.setString(3, film.getRunTimeFilm());
+            statement.setString(4, film.getGenreFilm());
+            statement.setDate(5, film.getProducedIn());
+            statement.setString(6, film.getDirectedBy());
+            statement.setString(7, film.getPictureURL());
+            statement.setString(8, film.getRatingFilm());
+            statement.setString(9, film.getBackgroundURL());
+            statement.setString(10, film.getStreamingNow());
+            statement.setInt(11, film.getIdFilm());
             statement.executeUpdate();
         }
 

@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface ReservationDAO {
     List<Reservation> getReservationsByUserId(int userId);
-    public void makeReservation(Integer idMovie, Date dateReserve, Time timeReserve, String qrCode, String seat, String experience, String offer) throws SQLException, ClassNotFoundException;
+    public void makeReservation(Integer idUser, Integer idMovie, Date dateReserve, Time timeReserve, String qrCode, String seat, String experience, String offer) throws SQLException, ClassNotFoundException;
 
 }
