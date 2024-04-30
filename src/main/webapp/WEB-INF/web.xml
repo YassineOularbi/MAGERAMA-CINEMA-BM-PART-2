@@ -38,6 +38,25 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>UpDateFilms</servlet-name>
+        <servlet-class>jee.javapack.servlets.UpDateFilms</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpDateFilms</servlet-name>
+        <url-pattern>/UpDateFilms</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>DeleteFilm</servlet-name>
+        <servlet-class>jee.javapack.servlets.DeleteFilm</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteFilm</servlet-name>
+        <url-pattern>/DeleteFilm</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>Authentication</servlet-name>
         <servlet-class>jee.javapack.servlets.Authentication</servlet-class>
     </servlet>
