@@ -10,7 +10,6 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeParseException;
@@ -43,7 +42,9 @@ public class ReserveNow extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FilmDAOImpl filmDAO = new FilmDAOImpl();
+        HttpSession session = request.getSession();
         ReservationDAOImpl reservationDAO = new ReservationDAOImpl();
+        Integer idUser = (Integer) session.getAttribute("id");
         String dateStr = request.getParameter("dateInput");
         String time = request.getParameter("timeInput");
         String experience = request.getParameter("experienceInput");
@@ -53,7 +54,7 @@ public class ReserveNow extends HttpServlet {
         String qrCode = generateRandomCode();
         time += ":00";
         try {
-            reservationDAO.makeReservation(idMovie, java.sql.Date.valueOf(dateStr), java.sql.Time.valueOf(time), qrCode, seat, experience, offer);
+            reservationDAO.makeReservation(idUser, idMovie, java.sql.Date.valueOf(dateStr), java.sql.Time.valueOf(time), qrCode, seat, experience, offer);
             request.setAttribute("Movie", filmDAO.getMovieById(idMovie));
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);

@@ -7,6 +7,19 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language = "java" %>
+<%@ page import = "java.sql.*" %>
+
+<%
+
+
+    if(session.getAttribute("login") != null){
+        String login = session.getAttribute("login").toString();
+
+    }else{
+        response.sendRedirect("authentication.jsp");
+    }
+%>
 
 <html lang="en">
 
@@ -163,7 +176,7 @@
                     <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
                         <a href="#" class="dropdown-item">My Profile</a>
                         <a href="#" class="dropdown-item">Settings</a>
-                        <a href="#" class="dropdown-item">Log Out</a>
+                        <a href="Logout" class="dropdown-item">Log Out</a>
                     </div>
                 </div>
             </div>

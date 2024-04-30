@@ -8,7 +8,7 @@ public class ConnectionDAO {
     private static final String jdbcURL = "jdbc:mysql://localhost:3306/megarama_bm";
     private static final String jdbcUserName = "root";
 
-    private static final String jdbcPassword = "1234";
+    private static final String jdbcPassword = "0000";
 
     private static final String jdbcDriver = "com.mysql.cj.jdbc.Driver";
 

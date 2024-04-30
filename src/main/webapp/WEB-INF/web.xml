@@ -46,6 +46,15 @@
         <url-pattern>/auth-user</url-pattern>
     </servlet-mapping>
 
+    <filter>
+        <filter-name>ServletFilter</filter-name>
+        <filter-class>jee.javapack.filter.ServletFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ServletFilter</filter-name>
+        <url-pattern>/Login</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>SearchServlet</servlet-name>
         <servlet-class>jee.javapack.servlets.SearchServlet</servlet-class>
@@ -63,5 +72,24 @@
         <servlet-name>ReserveNow</servlet-name>
         <url-pattern>/reserve-now</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ReservationHistory</servlet-name>
+        <servlet-class>jee.javapack.servlets.ReservationHistory</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReservationHistory</servlet-name>
+        <url-pattern>/reserve-history</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ReservationTicket</servlet-name>
+        <servlet-class>jee.javapack.servlets.ReservationTicket</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReservationTicket</servlet-name>
+        <url-pattern>/reservation-ticket</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>
