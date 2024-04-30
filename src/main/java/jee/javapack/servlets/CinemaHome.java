@@ -1,5 +1,6 @@
 package jee.javapack.servlets;
 
+import com.mysql.cj.Session;
 import jee.javapack.beans.Film;
 import jee.javapack.dao.FilmDAO;
 import jee.javapack.dao.FilmDAOImpl;
@@ -16,9 +17,11 @@ public class CinemaHome extends HttpServlet {
     private final FilmDAO filmDAO = new FilmDAOImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         List<Film> ratingFilms = filmDAO.getHighRatedFilms();
         request.setAttribute("ratingFilms", ratingFilms);
         request.setAttribute("trendFilms", ratingFilms);
+
         List<Film> films = filmDAO.getAllFilms();
         request.setAttribute("films", films);
         System.out.println(films);

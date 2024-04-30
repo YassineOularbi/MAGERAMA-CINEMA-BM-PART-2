@@ -1,5 +1,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language = "java" %>
+<%@ page import = "java.sql.*" %>
+
+<%
+
+
+    if(session.getAttribute("login") != null){
+        String login = session.getAttribute("login").toString();
+
+    }else{
+        response.sendRedirect("authentication.jsp");
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,13 +76,40 @@
                 </li>
             </form>
         </div>
-        <i class='bx bx-user bx-flip-horizontal icon rounded' style='color:white'></i>
+        <i class='bx bx-user bx-flip-horizontal icon rounded' style='color:white' data-bs-toggle="modal" data-bs-target="#exampleModal" type="button"></i>
+
+
+
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                 aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
 </nav>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark text-light">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">User account</h5>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Ajoutez ici le contenu des coordonnées de l'utilisateur -->
+                <p>Nom: ${login}</p>
+                <p>Email: ${login}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a href="Logout" type="button" class="btn btn-warning">Log out</a>
+                <a href="reserve-history" class="btn btn-danger text-light">Reservation<i class='bx bxs-coupon'
+                                                                         style='color:#ffffff'></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <section class="movie-trend">
     <c:if test="${not empty trendFilms}">
         <img style="z-index: -1000; width: 1300px; position: absolute; top: 0; left: 0;" src="${trendFilms[0].getBackgroundURL()}">
