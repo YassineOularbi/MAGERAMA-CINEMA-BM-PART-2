@@ -12,7 +12,7 @@
     <style><%@include file="css/authentication.css"%></style>
 </head>
 <body>
-<img style="z-index: -1000; width: 1300px; height: 800px; position: absolute; top: 0; left: 0;" src="images/bg-GOT.jpg">
+<img id="img-src"style="z-index: -1000; width: 1300px; height: 800px; position: absolute; top: 0; left: 0;" src="images/bg-GOT.jpg">
 <input type ="hidden" id="status" value = "<%= request.getAttribute("status") %>">
 <div class="background"></div>
 <div class="container" id="container">

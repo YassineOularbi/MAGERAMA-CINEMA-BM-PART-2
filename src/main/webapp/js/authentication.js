@@ -11,7 +11,12 @@ signInButton.addEventListener("click", () => {
 });
 
 const images = ['images/bg1.jpg', 'images/bg2.jpg', 'images/bg3.jpg', 'images/bg4.jpg', 'images/bg5.jpg'];
-images.forEach(image => {
-    const img = new Image();
-    img.src = image;
-});
+let currentIndex = 0;
+let bodyElement = document.getElementById("img-src");
+function changeBackgroundImage() {
+    bodyElement.style.background = `${backgroundImages[currentIndex]} no-repeat top right/cover`;
+    currentIndex = (currentIndex + 1) % backgroundImages.length;
+    setTimeout(changeBackgroundImage, 2000);
+
+
+}

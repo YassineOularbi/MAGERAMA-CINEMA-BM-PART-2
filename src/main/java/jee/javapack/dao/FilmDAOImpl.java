@@ -9,27 +9,6 @@ import java.util.List;
 public class FilmDAOImpl implements FilmDAO {
 
 
-    public void statementFilm(ArrayList<Film> listFilm, PreparedStatement statement) throws SQLException {
-        ResultSet resultSet = statement.executeQuery();
-        while (resultSet.next()) {
-            Film film = new Film(
-                    resultSet.getInt("idFilm"),
-                    resultSet.getString("titleFilm"),
-                    resultSet.getString("descriptionFilm"),
-                    resultSet.getString("runTimeFilm"),
-                    resultSet.getString("genreFilm"),
-                    resultSet.getDate("producedIn"),
-                    resultSet.getString("directedBy"),
-                    resultSet.getString("pictureURL"),
-                    resultSet.getString("backgroundURL"),
-                    resultSet.getString("ratingFilm"),
-                    resultSet.getString("streamingNow")
-            );
-            listFilm.add(film);
-        }
-    }
-
-
 
     @Override
     public List<Film> getHighRatedFilms() {
