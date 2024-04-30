@@ -10,16 +10,25 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 
-@WebServlet(name = "AddFilmServlet", value = "/addFilm")
-public class AddFilmServlet extends HttpServlet {
+@WebServlet(name = "UpDateFilms", value = "/UpDateFilms")
+public class UpDateFilms extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.getServletContext().getRequestDispatcher("/addFilm.jsp").forward(request, response);
+        Integer id = Integer.valueOf(request.getParameter("id"));
+        FilmDAOImpl filmDAO = new FilmDAOImpl();
+        try {
+            Film film = filmDAO.getMovieById(id);
+            request.setAttribute("film", film);
+            System.out.println(film);
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        this.getServletContext().getRequestDispatcher("/UpDateFilm.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        Integer idFilm = Integer.valueOf(request.getParameter("idFilm"));
         String titleFilm = request.getParameter("titleFilm");
         String descriptionFilm = request.getParameter("descriptionFilm");
         String runTimeFilm = request.getParameter("runTimeFilm");
@@ -30,16 +39,15 @@ public class AddFilmServlet extends HttpServlet {
         String ratingFilm = request.getParameter("ratingFilm");
         String backgroundURL = request.getParameter("backgroundURL");
         String streamingNow = request.getParameter("streamingNow");
-
-        FilmDAOImpl filmDao = new FilmDAOImpl();
-        Film film = new Film(null, titleFilm, descriptionFilm, runTimeFilm, genreFilm, producedIn, directedBy, pictureURL, ratingFilm, backgroundURL, streamingNow);
+        Film film = new Film(idFilm, titleFilm, descriptionFilm, runTimeFilm, genreFilm, producedIn, directedBy, pictureURL, ratingFilm, backgroundURL, streamingNow);
+        FilmDAOImpl filmDAO = new FilmDAOImpl();
         try {
-            filmDao.addFilms(film);
+            filmDAO.updateFilm(film);
+            request.setAttribute("shows", filmDAO.showFilm());
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-
-
-        response.sendRedirect("Admin.jsp");
-    }
+        this.getServletContext().getRequestDispatcher("/Admin.jsp").forward(request, response);
+ }
 }

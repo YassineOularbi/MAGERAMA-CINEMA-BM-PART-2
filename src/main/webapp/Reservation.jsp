@@ -619,8 +619,7 @@
     <section style="height: 300px; padding-left: 50px; margin-top: -850px;" class="movie-card-section">
 
     </section>
-
-    <script>
+<script>
         document.addEventListener('DOMContentLoaded', function () {
             const chairCells = document.querySelectorAll('.bx-chair');
 
