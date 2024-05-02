@@ -73,3 +73,19 @@ document
     });
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    const saveButtons = document.querySelectorAll('.btn-save');
+
+    saveButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Toggle 'Saved' and 'Save' text
+            if (button.textContent === 'Save') {
+                button.textContent = 'Saved';
+                button.classList.add('saved');
+            } else {
+                button.textContent = 'Save';
+                button.classList.remove('saved');
+            }
+        });
+    });
+});
