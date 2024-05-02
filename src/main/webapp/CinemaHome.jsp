@@ -92,7 +92,7 @@
         <div class="modal-content bg-dark text-light">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">User account</h5>
-                    <span aria-hidden="true">&times;</span>
+                <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
@@ -103,9 +103,12 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <a href="Logout" type="button" class="btn btn-warning">Log out</a>
-                <a href="reserve-history" class="btn btn-danger text-light">Reservation<i class='bx bxs-coupon'
-                                                                         style='color:#ffffff'></i></a>
+                <a href="reserve-history" class="btn btn-danger text-light">Reservation<i class='bx bxs-coupon' style='color:#ffffff'></i></a>
+                <a href="playlist" class="btn btn-success text-light">My Playlist<i class='bx bxs-collection' style='color:#ffffff'></i></a>
+
             </div>
+
+
         </div>
     </div>
 </div>
@@ -161,36 +164,55 @@
 </section>
 
 
-<section  class="showtimes" style="height: 100vh; width: 100%; background-color: black; padding-top: 40px; padding-left: 50px;" >
+<section class="showtimes" style="height: 100vh; width: 100%; background-color: black; padding-top: 40px; padding-left: 50px;">
     <p style="font-size: 20px; text-align: start; font-weight: bold;" class="text-light">ShowTimes</p>
-    <div >
+    <div>
         <a style="border-bottom: 2px solid red; padding: 7px; font-weight:500; padding-left: 0;" href="">Showing Now</a>
-        <a style="margin-left: 20px; font-weight: 500;" href="">Cooming Soon !</a>
+        <a style="margin-left: 20px; font-weight: 500;" href="">Coming Soon!</a>
     </div>
     <div class="row">
         <c:forEach var="film" items="${films}">
-            <div  class="col-md-4">
-
+            <div class="col-md-4">
                 <article style="margin-top: 60px; margin-bottom: 40px;" class="cardss">
-
                     <img class="card__background" src="${film.pictureURL}" alt=""/>
                     <div class="card__content | flow">
                         <div class="card__content--container | flow">
                             <h2 class="card__title">${film.titleFilm}</h2>
                             <p class="card__description">${film.descriptionFilm}</p>
+                            <!-- Book and Save Buttons in the Same Line with Space -->
+                            <div class="button-container">
+                                <button class="btn-save btn card__button text-light mt-2 rounded align-items-center">Save <i class='bx bxs-save' style='color:#ffffff; margin-left: 5px;'></i></button>
+                                <a href="${pageContext.request.contextPath}/reserve-now?id=${film.getIdFilm()}" class="btn btn-book card__button text-light mt-2 rounded align-items-center">Book <i class='bx bxs-coupon' style='color:#ffffff; margin-left: 5px;'></i></a>
+                            </div>
                         </div>
-                        <a href="${pageContext.request.contextPath}/reserve-now?id=${film.getIdFilm()}" class="btn card__button text-light mt-2 rounded align-items-center">Book <i class='bx bxs-coupon' style='color:#ffffff; margin-left: 5px;'></i></a>
                     </div>
-
                 </article>
-
             </div>
         </c:forEach>
+
     </div>
-
-
-
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const saveButtons = document.querySelectorAll('.btn-save');
+
+        saveButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Toggle 'Saved' and 'Save' text
+                if (button.textContent === 'Save') {
+                    button.textContent = 'Saved';
+                    button.classList.add('saved');
+                } else {
+                    button.textContent = 'Save';
+                    button.classList.remove('saved');
+                }
+            });
+        });
+    });
+</script>
+
+
 
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
