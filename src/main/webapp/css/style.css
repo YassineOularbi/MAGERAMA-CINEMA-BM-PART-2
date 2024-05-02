@@ -837,3 +837,13 @@ input[type="date"]::-webkit-calendar-picker {
 }
 
 
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-save, .btn-book {
+    width: calc(50% - 5px);
+}
+
+
