@@ -15,8 +15,9 @@ public class Film {
     private String backgroundURL;
     private String ratingFilm;
     private String streamingNow;
+    private String trailer;
 
-    public Film(Integer idFilm, String titleFilm, String descriptionFilm, String runTimeFilm, String genreFilm, Date producedIn, String directedBy, String pictureURL, String backgroundURL, String ratingFilm, String streamingNow) {
+    public Film(Integer idFilm, String titleFilm, String descriptionFilm, String runTimeFilm, String genreFilm, Date producedIn, String directedBy, String pictureURL, String backgroundURL, String ratingFilm, String streamingNow ,trailer) {
         this.idFilm = idFilm;
         this.titleFilm = titleFilm;
         this.descriptionFilm = descriptionFilm;
@@ -28,6 +29,7 @@ public class Film {
         this.backgroundURL = backgroundURL;
         this.ratingFilm = ratingFilm;
         this.streamingNow = streamingNow;
+        this.trailer = trailer;
     }
 
     public Film() {}
@@ -118,6 +120,14 @@ public class Film {
 
     public void setStreamingNow(String streamingNow) {
         this.streamingNow = streamingNow;
+    }
+
+    public String getTrailer() {
+        return trailer;
+    }
+
+    public void setTrailer(String trailer) {
+        this.trailer = trailer;
     }
 
     @Override
