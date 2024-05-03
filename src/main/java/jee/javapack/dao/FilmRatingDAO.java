@@ -1,3 +1,4 @@
+// FilmRatingDAO.java
 package jee.javapack.dao;
 
 import jee.javapack.beans.FilmRating;
