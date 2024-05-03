@@ -1,5 +1,7 @@
 package jee.javapack.servlets;
 
+import db.hibernate.dao.HibernateDAO;
+import db.hibernate.dao.HibernateDAOImpl;
 import jee.javapack.beans.Film;
 import jee.javapack.dao.FilmDAOImpl;
 
@@ -17,9 +19,8 @@ public class AddFilmServlet extends HttpServlet {
         this.getServletContext().getRequestDispatcher("/addFilm.jsp").forward(request, response);
     }
 
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        HibernateDAO hibernateDAO = new HibernateDAOImpl();
         String titleFilm = request.getParameter("titleFilm");
         String descriptionFilm = request.getParameter("descriptionFilm");
         String runTimeFilm = request.getParameter("runTimeFilm");
@@ -30,16 +31,14 @@ public class AddFilmServlet extends HttpServlet {
         String ratingFilm = request.getParameter("ratingFilm");
         String backgroundURL = request.getParameter("backgroundURL");
         String streamingNow = request.getParameter("streamingNow");
-
-        FilmDAOImpl filmDao = new FilmDAOImpl();
-        Film film = new Film(null, titleFilm, descriptionFilm, runTimeFilm, genreFilm, producedIn, directedBy, pictureURL, ratingFilm, backgroundURL, streamingNow);
+        Film film = new Film(null, titleFilm, descriptionFilm, runTimeFilm, genreFilm, producedIn, directedBy, pictureURL, backgroundURL, ratingFilm, streamingNow);
         try {
-            filmDao.addFilms(film);
-        } catch (SQLException e) {
+            hibernateDAO.save(film);
+            request.setAttribute("shows", hibernateDAO.show(Film.class));
+        } catch (InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+        this.getServletContext().getRequestDispatcher("/Admin.jsp").forward(request, response);
 
-
-        response.sendRedirect("Admin.jsp");
     }
 }

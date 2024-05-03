@@ -1,18 +1,14 @@
 package jee.javapack.filter;
 
-import jee.javapack.beans.Film;
-import jee.javapack.dao.FilmDAOImpl;
-import jee.javapack.dao.LoginDAO;
-import jee.javapack.dao.UserrDAO;
+import jee.javapack.dao.UserDAOImpl;
+import jee.javapack.dto.UserDTO;
 
 import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 @WebFilter(filterName = "ServletFilter")
 public class ServletFilter implements Filter {
@@ -28,18 +24,23 @@ public class ServletFilter implements Filter {
         HttpSession session = ((HttpServletRequest) request).getSession();
         String login = request.getParameter("login");
         String password = request.getParameter("pwd");
-        UserrDAO user = LoginDAO.authenticate(login, password);
-        System.out.println("Login Attempt: Email - " + login + ", Password - " + password);
+        UserDAOImpl userDAO = new UserDAOImpl();
+        UserDTO user = null;
+        try {
+            user = userDAO.authenticate(login, password);
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         if (user != null) {
             session.setAttribute("login", login);
-            String role = user.getRole();
+            String role = user.getRoleAU();
             if ("admin".equals(role)) {
-                session.setAttribute("role", user.getRole());
+                session.setAttribute("role", user.getRoleAU());
                 chain.doFilter(request, response);
             } else {
                 session.setAttribute("role", "user");
                 session.setAttribute("id", user.getId());
-                session.setAttribute("name", login);
+                session.setAttribute("name", user.getUserName());
                 chain.doFilter(request, response);
             }
         } else {

@@ -2,16 +2,15 @@
 package jee.javapack.servlets;
 
 
+import db.hibernate.dao.HibernateDAO;
+import db.hibernate.dao.HibernateDAOImpl;
 import jee.javapack.beans.Film;
 import jee.javapack.dao.FilmDAO;
 import jee.javapack.dao.FilmDAOImpl;
-import jee.javapack.dao.LoginDAO;
-import jee.javapack.dao.UserrDAO;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Objects;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,23 +27,24 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String role = (String) session.getAttribute("role");
-        System.out.println(role);
+        HibernateDAO hibernateDAO = new HibernateDAOImpl();
         if ("admin".equals(role)) {
-            FilmDAOImpl show = new FilmDAOImpl();
             try {
-                request.setAttribute("shows", show.showFilm());
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                request.setAttribute("shows", hibernateDAO.show(Film.class));
+            } catch (InstantiationException | IllegalAccessException e) {
+                throw new RuntimeException(e);
             }
             this.getServletContext().getRequestDispatcher("/Admin.jsp").forward(request, response);
         } else if("user".equals(role)){
-            List<Film> ratingFilms = filmDAO.getHighRatedFilms();
-            request.setAttribute("ratingFilms", ratingFilms);
-            request.setAttribute("trendFilms", ratingFilms);
-            List<Film> films = filmDAO.getAllFilms();
-            request.setAttribute("films", films);
-            System.out.println(films);
+            List<Film> ratingFilms = null;
+            try {
+                ratingFilms = filmDAO.getHighRatedFilms();
+                request.setAttribute("ratingFilms", ratingFilms);
+                request.setAttribute("trendFilms", ratingFilms);
+                request.setAttribute("films", hibernateDAO.show(Film.class));
+            } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
             request.getRequestDispatcher("/CinemaHome.jsp").forward(request, response);
         } else if("notfound".equals(role)){
             response.sendRedirect("authentication.jsp");

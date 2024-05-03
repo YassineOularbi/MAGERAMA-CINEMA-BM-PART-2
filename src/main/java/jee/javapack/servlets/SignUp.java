@@ -1,6 +1,8 @@
 package jee.javapack.servlets;
 
-import jee.javapack.dao.SignInDAO;
+import db.hibernate.dao.HibernateDAO;
+import db.hibernate.dao.HibernateDAOImpl;
+import jee.javapack.beans.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,25 +18,19 @@ public class SignUp extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HibernateDAO hibernateDAO = new HibernateDAOImpl();
         String userName = request.getParameter("name");
         String userEmail = request.getParameter("email");
         String userPassword = request.getParameter("password");
-        RequestDispatcher dispatcher = null;
-
+        User user = new User();
+        user.setUserName(userName);
+        user.setUserMail(userEmail);
+        user.setPassword(userPassword);
         try {
-            int counter = SignInDAO.createUser(userName, userEmail, userPassword);
-            dispatcher = request.getRequestDispatcher("authentication.jsp");
-
-            if (counter > 0) {
-                request.setAttribute("status", "success");
-            } else {
-                request.setAttribute("status", "failed");
-            }
-
-            dispatcher.forward(request, response);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Handle the error appropriately, maybe redirect to an error page
+            hibernateDAO.save(user);
+        } catch (InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException(e);
         }
+        this.getServletContext().getRequestDispatcher("/authentication.jsp").forward(request, response);
     }
 }

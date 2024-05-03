@@ -1,9 +1,15 @@
 package jee.javapack.beans;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.sql.Date;
 
-
+@Entity
 public class Film {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idFilm;
     private String titleFilm;
     private String descriptionFilm;

@@ -136,8 +136,6 @@
         </div>
     </c:if>
 
-
-
 </section>
 
 <section style="height: 300px; padding-left: 50px;" class="movie-card-section">

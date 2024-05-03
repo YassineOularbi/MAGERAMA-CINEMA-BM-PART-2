@@ -10,14 +10,8 @@ public class ConnectionDAO {
     private static final String jdbcPassword = "1234";
     private static final String jdbcDriver = "com.mysql.cj.jdbc.Driver";
 
-    public static Connection getConnection() throws SQLException {
-        Connection connection = null;
-        try {
-            Class.forName(jdbcDriver);
-            connection = DriverManager.getConnection(jdbcURL, jdbcUserName, jdbcPassword);
-        } catch (ClassNotFoundException | SQLException e) {
-            throw new SQLException("error", e);
-        }
-        return connection;
+    public static Connection getConnection() throws SQLException, ClassNotFoundException {
+        Class.forName(jdbcDriver);
+        return DriverManager.getConnection(jdbcURL, jdbcUserName, jdbcPassword);
     }
 }

@@ -1,6 +1,9 @@
 package jee.javapack.servlets;
 
+import db.hibernate.dao.HibernateDAO;
+import db.hibernate.dao.HibernateDAOImpl;
 import jee.javapack.beans.Film;
+import jee.javapack.dao.FilmDAO;
 import jee.javapack.dao.FilmDAOImpl;
 
 import javax.servlet.*;
@@ -20,21 +23,17 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String titleFilm =request.getParameter("titleFilm");
-        FilmDAOImpl filmDAO = new FilmDAOImpl();
-        FilmDAOImpl serachfilm=new FilmDAOImpl();
-
+        FilmDAO filmDAO = new FilmDAOImpl();
+        FilmDAO searchFilm=new FilmDAOImpl();
+        HibernateDAO hibernateDAO = new HibernateDAOImpl();
         try {
-            request.setAttribute("trendFilms",serachfilm.SearchFilms(titleFilm));
-        } catch (SQLException | ClassNotFoundException e) {
+            List<Film> ratingFilms = filmDAO.getHighRatedFilms();
+            request.setAttribute("ratingFilms", ratingFilms);
+            request.setAttribute("trendFilms",searchFilm.SearchFilms(titleFilm));
+            request.setAttribute("films", hibernateDAO.show(Film.class));
+        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
-        List<Film> ratingFilms = filmDAO.getHighRatedFilms();
-        request.setAttribute("ratingFilms", ratingFilms);
-
-        List<Film> films = filmDAO.getAllFilms();
-        request.setAttribute("films", films);
-        System.out.println(films);
-
         this.getServletContext().getRequestDispatcher("/CinemaHome.jsp").forward(request, response);
 
     }
