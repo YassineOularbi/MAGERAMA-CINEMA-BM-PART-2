@@ -9,11 +9,11 @@ public class FilmRating {
     private int rating;
     private Date ratingDate;
 
-    // Constructeur par défaut
+
     public FilmRating() {
     }
 
-    // Constructeur avec paramètres
+
     public FilmRating(Long idRating, Long idUser, Long idFilm, int rating, Date ratingDate) {
         this.idRating = idRating;
         this.idUser = idUser;
@@ -22,7 +22,10 @@ public class FilmRating {
         this.ratingDate = ratingDate;
     }
 
-    // Getters et setters
+    public FilmRating(long filmId, long userId, int rating) {
+    }
+
+
     public Long getIdRating() {
         return idRating;
     }

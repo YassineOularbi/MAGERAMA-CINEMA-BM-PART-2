@@ -9,7 +9,7 @@ import java.util.List;
 
 public class FilmRatingDAOImpl implements FilmRatingDAO {
 
-    
+
     @Override
     public void addFilmRating(FilmRating filmRating) {
         try (Connection connection = ConnectionDAO.getConnection();
