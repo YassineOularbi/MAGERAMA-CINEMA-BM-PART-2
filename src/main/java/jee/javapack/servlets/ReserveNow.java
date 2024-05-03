@@ -1,15 +1,15 @@
 package jee.javapack.servlets;
 
+import db.hibernate.dao.HibernateDAO;
+import db.hibernate.dao.HibernateDAOImpl;
 import jee.javapack.beans.Film;
-import jee.javapack.dao.FilmDAOImpl;
-import jee.javapack.dao.ReservationDAOImpl;
+import jee.javapack.beans.Reservation;
 import jee.javapack.dto.DateModel;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeParseException;
@@ -22,11 +22,12 @@ public class ReserveNow extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer idMovie = Integer.valueOf(request.getParameter("id"));
-        FilmDAOImpl filmDAO = new FilmDAOImpl();
+        HibernateDAO hibernateDAO = new HibernateDAOImpl();
         Film foundFilm = null;
         try {
-            foundFilm = filmDAO.getMovieById(idMovie);
-        } catch (SQLException | ClassNotFoundException e) {
+            foundFilm = (Film) hibernateDAO.get(Film.class, idMovie);
+            request.setAttribute("Movie", foundFilm);
+        } catch (InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
         String[] dates = foundFilm.getStreamingNow().split(" ");
@@ -41,9 +42,8 @@ public class ReserveNow extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        FilmDAOImpl filmDAO = new FilmDAOImpl();
         HttpSession session = request.getSession();
-        ReservationDAOImpl reservationDAO = new ReservationDAOImpl();
+        HibernateDAO hibernateDAO= new HibernateDAOImpl();
         Integer idUser = (Integer) session.getAttribute("id");
         String dateStr = request.getParameter("dateInput");
         String time = request.getParameter("timeInput");
@@ -53,10 +53,11 @@ public class ReserveNow extends HttpServlet {
         Integer idMovie = Integer.valueOf(request.getParameter("idInput"));
         String qrCode = generateRandomCode();
         time += ":00";
+        Reservation reservation = new Reservation(null, idUser, idMovie, qrCode, seat, experience, offer, java.sql.Date.valueOf(dateStr), java.sql.Time.valueOf(time));
         try {
-            reservationDAO.makeReservation(idUser, idMovie, java.sql.Date.valueOf(dateStr), java.sql.Time.valueOf(time), qrCode, seat, experience, offer);
-            request.setAttribute("Movie", filmDAO.getMovieById(idMovie));
-        } catch (SQLException | ClassNotFoundException e) {
+            hibernateDAO.save(reservation);
+            request.setAttribute("Movie", hibernateDAO.get(Film.class, idMovie));
+        } catch (InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -95,7 +96,6 @@ public class ReserveNow extends HttpServlet {
     public static String generateRandomCode() {
         Random random = new Random();
 
-        String digits = "0123456789";
         String letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
         String part1 = String.valueOf(random.nextInt(10));

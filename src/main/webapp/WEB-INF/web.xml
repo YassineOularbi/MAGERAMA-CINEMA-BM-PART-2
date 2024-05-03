@@ -4,30 +4,6 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-
-
-
-
-    <servlet>
-        <servlet-name>CinemaHome</servlet-name>
-        <servlet-class>jee.javapack.servlets.CinemaHome</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>CinemaHome</servlet-name>
-        <url-pattern>/cinema-home</url-pattern>
-    </servlet-mapping>
-
-
-    <servlet>
-        <servlet-name>DisplayFilms</servlet-name>
-        <servlet-class>jee.javapack.servlets.DisplayFilms</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>DisplayFilms</servlet-name>
-        <url-pattern>/shows</url-pattern>
-    </servlet-mapping>
-
-
     <servlet>
         <servlet-name>AddFilmServlet</servlet-name>
         <servlet-class>jee.javapack.servlets.AddFilmServlet</servlet-class>
@@ -120,6 +96,5 @@
         <servlet-name>ReservationTicket</servlet-name>
         <url-pattern>/reservation-ticket</url-pattern>
     </servlet-mapping>
-
 
 </web-app>

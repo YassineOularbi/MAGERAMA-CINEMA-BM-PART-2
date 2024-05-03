@@ -1,5 +1,6 @@
 package jee.javapack.servlets;
 
+import jee.javapack.dao.ReservationDAO;
 import jee.javapack.dao.ReservationDAOImpl;
 
 import javax.servlet.*;
@@ -13,12 +14,10 @@ public class ReservationHistory extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        ReservationDAOImpl reservationDAO = new ReservationDAOImpl();
+        ReservationDAO reservationDAO = new ReservationDAOImpl();
         try {
             request.setAttribute("arrayReservation", reservationDAO.getUserReservation((Integer) session.getAttribute("id")));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         this.getServletContext().getRequestDispatcher("/ReservationHistory.jsp").forward(request, response);

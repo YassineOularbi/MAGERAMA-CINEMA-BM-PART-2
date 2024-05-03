@@ -15,7 +15,7 @@
 
     if(session.getAttribute("login") != null){
         String login = session.getAttribute("login").toString();
-
+        String name = session.getAttribute("name").toString();
     }else{
         response.sendRedirect("authentication.jsp");
     }
@@ -79,7 +79,7 @@
             </div>
             <div class="modal-body">
                 <!-- Ajoutez ici le contenu des coordonnées de l'utilisateur -->
-                <p>Nom: ${login}</p>
+                <p>Nom: ${name}</p>
                 <p>Email: ${login}</p>
             </div>
             <div class="modal-footer">

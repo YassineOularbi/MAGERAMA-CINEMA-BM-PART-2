@@ -1,13 +1,20 @@
 package jee.javapack.beans;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.sql.Time;
 import java.util.Date;
 
+@Entity
 public class Reservation {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idReservation;
     private Integer idUser;
     private Integer idFilm;
-    private Integer qrCodeBillet;
+    private String qrCodeBillet;
     private String seatPlace;
     private String experienceType;
     private String offerBillet;
@@ -15,7 +22,7 @@ public class Reservation {
     private Time timeReservation;
 
 
-    public Reservation(Integer idReservation, Integer idUser, Integer idFilm, Integer qrCodeBillet, String seatPlace, String ExperienceType, String offerBillet, Date dateReservation, Time timeReservation) {
+    public Reservation(Integer idReservation, Integer idUser, Integer idFilm, String qrCodeBillet, String seatPlace, String ExperienceType, String offerBillet, Date dateReservation, Time timeReservation) {
         this.idReservation = idReservation;
         this.idUser = idUser;
         this.idFilm = idFilm;
@@ -25,6 +32,10 @@ public class Reservation {
         this.offerBillet = offerBillet;
         this.dateReservation = dateReservation;
         this.timeReservation = timeReservation;
+    }
+
+    public Reservation() {
+
     }
 
     public Integer getIdReservation() {
@@ -51,11 +62,11 @@ public class Reservation {
         this.idFilm = idFilm;
     }
 
-    public Integer getQrCodeBillet() {
+    public String getQrCodeBillet() {
         return qrCodeBillet;
     }
 
-    public void setQrCodeBillet(Integer qrCodeBillet) {
+    public void setQrCodeBillet(String qrCodeBillet) {
         this.qrCodeBillet = qrCodeBillet;
     }
 
