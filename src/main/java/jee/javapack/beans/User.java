@@ -1,16 +1,39 @@
 package jee.javapack.beans;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name = "username")
     private String userName;
+    @Column(name = "user_mail")
     private String userMail;
+    @Column(name = "user_password")
     private String password;
+    @Column(name = "user_role")
     private String roleAU;
 
-    public User(String userName, String userMail, String password, String roleAU) {
+    public User() {
+    }
+
+    public User(Integer id, String userName, String userMail, String password, String roleAU) {
+        this.id = id;
         this.userName = userName;
         this.userMail = userMail;
         this.password = password;
         this.roleAU = roleAU;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getUserName() {
