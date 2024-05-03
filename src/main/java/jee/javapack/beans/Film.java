@@ -23,7 +23,7 @@ public class Film {
     private String streamingNow;
     private String trailer;
 
-    public Film(Integer idFilm, String titleFilm, String descriptionFilm, String runTimeFilm, String genreFilm, Date producedIn, String directedBy, String pictureURL, String backgroundURL, String ratingFilm, String streamingNow ,trailer) {
+    public Film(Integer idFilm, String titleFilm, String descriptionFilm, String runTimeFilm, String genreFilm, Date producedIn, String directedBy, String pictureURL, String backgroundURL, String ratingFilm, String streamingNow, String trailer) {
         this.idFilm = idFilm;
         this.titleFilm = titleFilm;
         this.descriptionFilm = descriptionFilm;
@@ -142,14 +142,15 @@ public class Film {
                 "idFilm=" + idFilm +
                 ", titleFilm='" + titleFilm + '\'' +
                 ", descriptionFilm='" + descriptionFilm + '\'' +
-                ", runTimeFilm=" + runTimeFilm +
+                ", runTimeFilm='" + runTimeFilm + '\'' +
                 ", genreFilm='" + genreFilm + '\'' +
                 ", producedIn=" + producedIn +
                 ", directedBy='" + directedBy + '\'' +
                 ", pictureURL='" + pictureURL + '\'' +
                 ", backgroundURL='" + backgroundURL + '\'' +
                 ", ratingFilm='" + ratingFilm + '\'' +
-                ", streamingNow=" + streamingNow +
+                ", streamingNow='" + streamingNow + '\'' +
+                ", trailer='" + trailer + '\'' +
                 '}';
     }
 }

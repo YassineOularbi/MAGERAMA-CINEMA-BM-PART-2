@@ -27,29 +27,24 @@ public class CommentDAOImpl implements CommentDAO {
 
     @Override
     public void updateComment(Comment comment) {
-        // Implémenter la logique pour mettre à jour un commentaire dans la base de données
     }
 
     @Override
     public Comment getCommentById(Long id) {
-        // Implémenter la logique pour récupérer un commentaire par son identifiant dans la base de données
         return null;
     }
 
     @Override
     public List<Comment> getCommentsByFilmId(Long filmId) {
-        // Implémenter la logique pour récupérer tous les commentaires pour un film donné dans la base de données
         return new ArrayList<>();
     }
 
     @Override
     public List<Comment> getCommentsByUserId(Long userId) {
-        // Implémenter la logique pour récupérer tous les commentaires d'un utilisateur donné dans la base de données
         return new ArrayList<>();
     }
 
     @Override
     public void deleteComment(Long id) {
-        // Implémenter la logique pour supprimer un commentaire de la base de données
     }
 }

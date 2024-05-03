@@ -1,4 +1,3 @@
-
 package jee.javapack.dao;
 
 import jee.javapack.beans.FilmRating;
@@ -8,7 +7,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class FilmRatingDAOImpl implements FilmRatingDAO {
-
 
     @Override
     public void addFilmRating(FilmRating filmRating) {
@@ -25,7 +23,6 @@ public class FilmRatingDAOImpl implements FilmRatingDAO {
 
     @Override
     public void updateFilmRating(FilmRating filmRating) {
-
     }
 
     @Override
@@ -40,14 +37,11 @@ public class FilmRatingDAOImpl implements FilmRatingDAO {
 
     @Override
     public List<FilmRating> getFilmRatingsByUserId(Long userId) {
+
         return Collections.emptyList();
     }
 
     @Override
     public void deleteFilmRating(Long id) {
-
     }
-
-    // Autres méthodes pour update, getFilmRatingById, getFilmRatingsByFilmId, getFilmRatingsByUserId et deleteFilmRating
-
 }

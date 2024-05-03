@@ -9,22 +9,14 @@ public class FilmRating {
     private int rating;
     private Date ratingDate;
 
-
     public FilmRating() {
     }
 
-
-    public FilmRating(Long idRating, Long idUser, Long idFilm, int rating, Date ratingDate) {
-        this.idRating = idRating;
-        this.idUser = idUser;
+    public FilmRating(Long idFilm, Long idUser, int rating) {
         this.idFilm = idFilm;
+        this.idUser = idUser;
         this.rating = rating;
-        this.ratingDate = ratingDate;
     }
-
-    public FilmRating(long filmId, long userId, int rating) {
-    }
-
 
     public Long getIdRating() {
         return idRating;

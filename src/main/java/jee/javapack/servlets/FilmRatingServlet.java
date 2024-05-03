@@ -23,9 +23,7 @@ public class FilmRatingServlet extends HttpServlet {
         long userId = Long.parseLong(request.getParameter("userId"));
         int rating = Integer.parseInt(request.getParameter("rating"));
 
-
         FilmRating filmRating = new FilmRating(filmId, userId, rating);
-
         filmRatingDAO.addFilmRating(filmRating);
 
         response.sendRedirect("confirmation.jsp");
