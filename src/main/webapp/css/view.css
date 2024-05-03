@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+
+
+}
+
+p a {
+    text-decoration: none;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color:#000;
+
+}
+.bgCard {
+    background-color: #ffcead;
+}
+
+.star-rating {
+    line-height: 32px;
+    font-size: 1.25em;
+}
+
+.star-rating .fa-star {
+    color: #ffd000;
+}
+
+.selectedImg {
+    object-fit: cover;
+}
+
+.text-shadow {
+    text-shadow: 1px 6px 3px #8C092D;
+; /* Adjust the shadow properties as needed */
+}

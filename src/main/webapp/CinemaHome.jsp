@@ -8,6 +8,7 @@
 
     if(session.getAttribute("login") != null){
         String login = session.getAttribute("login").toString();
+        String name = session.getAttribute("name").toString();
 
     }else{
         response.sendRedirect("authentication.jsp");
@@ -76,43 +77,13 @@
                 </li>
             </form>
         </div>
-        <i class='bx bx-user bx-flip-horizontal icon rounded' style='color:white' data-bs-toggle="modal" data-bs-target="#exampleModal" type="button"></i>
-
-
-
+        <i class='bx bx-user bx-flip-horizontal icon rounded' style='color:white'></i>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                 aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
 </nav>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content bg-dark text-light">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">User account</h5>
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- Ajoutez ici le contenu des coordonnées de l'utilisateur -->
-                <p>Nom: ${login}</p>
-                <p>Email: ${login}</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <a href="Logout" type="button" class="btn btn-warning">Log out</a>
-                <a href="reserve-history" class="btn btn-danger text-light">Reservation<i class='bx bxs-coupon' style='color:#ffffff'></i></a>
-                <a href="playlist" class="btn btn-success text-light">My Playlist<i class='bx bxs-collection' style='color:#ffffff'></i></a>
-
-            </div>
-
-
-        </div>
-    </div>
-</div>
-
 <section class="movie-trend">
     <c:if test="${not empty trendFilms}">
         <img style="z-index: -1000; width: 1300px; position: absolute; top: 0; left: 0;" src="${trendFilms[0].getBackgroundURL()}">
@@ -139,6 +110,8 @@
         </div>
     </c:if>
 
+
+
 </section>
 
 <section style="height: 300px; padding-left: 50px;" class="movie-card-section">
@@ -162,55 +135,36 @@
 </section>
 
 
-<section class="showtimes" style="height: 100vh; width: 100%; background-color: black; padding-top: 40px; padding-left: 50px;">
+<section  class="showtimes" style="height: 100vh; width: 100%; background-color: black; padding-top: 40px; padding-left: 50px;" >
     <p style="font-size: 20px; text-align: start; font-weight: bold;" class="text-light">ShowTimes</p>
-    <div>
+    <div >
         <a style="border-bottom: 2px solid red; padding: 7px; font-weight:500; padding-left: 0;" href="">Showing Now</a>
-        <a style="margin-left: 20px; font-weight: 500;" href="">Coming Soon!</a>
+        <a style="margin-left: 20px; font-weight: 500;" href="">Cooming Soon !</a>
     </div>
     <div class="row">
         <c:forEach var="film" items="${films}">
-            <div class="col-md-4">
+            <div  class="col-md-4">
+
                 <article style="margin-top: 60px; margin-bottom: 40px;" class="cardss">
+
                     <img class="card__background" src="${film.pictureURL}" alt=""/>
                     <div class="card__content | flow">
                         <div class="card__content--container | flow">
                             <h2 class="card__title">${film.titleFilm}</h2>
                             <p class="card__description">${film.descriptionFilm}</p>
-                            <!-- Book and Save Buttons in the Same Line with Space -->
-                            <div class="button-container">
-                                <button class="btn-save btn card__button text-light mt-2 rounded align-items-center">Save <i class='bx bxs-save' style='color:#ffffff; margin-left: 5px;'></i></button>
-                                <a href="${pageContext.request.contextPath}/reserve-now?id=${film.getIdFilm()}" class="btn btn-book card__button text-light mt-2 rounded align-items-center">Book <i class='bx bxs-coupon' style='color:#ffffff; margin-left: 5px;'></i></a>
-                            </div>
                         </div>
+                        <a href="${pageContext.request.contextPath}/reserve-now?id=${film.getIdFilm()}" class="btn card__button text-light mt-2 rounded align-items-center">Book <i class='bx bxs-coupon' style='color:#ffffff; margin-left: 5px;'></i></a>
                     </div>
+
                 </article>
+
             </div>
         </c:forEach>
-
     </div>
+
+
+
 </section>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const saveButtons = document.querySelectorAll('.btn-save');
-
-        saveButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Toggle 'Saved' and 'Save' text
-                if (button.textContent === 'Save') {
-                    button.textContent = 'Saved';
-                    button.classList.add('saved');
-                } else {
-                    button.textContent = 'Save';
-                    button.classList.remove('saved');
-                }
-            });
-        });
-    });
-</script>
-
-
 
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
