@@ -12,13 +12,13 @@ public class FilmRatingDAOImpl implements FilmRatingDAO {
 
     @Override
     public void addFilmRating(FilmRating filmRating) {
-        try (Connection connection = DriverManager.getConnection();
+        try (Connection connection = ConnectionDAO.getConnection();
              PreparedStatement statement = connection.prepareStatement("INSERT INTO RatingFilm (idUser, idFilm, rating) VALUES (?, ?, ?)")) {
             statement.setLong(1, filmRating.getIdUser());
             statement.setLong(2, filmRating.getIdFilm());
             statement.setInt(3, filmRating.getRating());
             statement.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

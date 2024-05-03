@@ -77,8 +77,8 @@ public class HibernateDAOImpl implements HibernateDAO {
     public <T> ArrayList<T> byTitle(Class<T> C, String title) throws InstantiationException, IllegalAccessException {
         Session session = HibernateUtil.CreateSessionFactory(C).openSession();
         session.beginTransaction();
-        Query query = session.createQuery("FROM " + C + " C WHERE C.titleFilm LIKE :title");
-        query.setParameter("title", title);
+        Query query = session.createQuery("FROM " + C.getSimpleName() + " C WHERE C.titleFilm LIKE :title");
+        query.setParameter("title", "%" + title + "%");
         ArrayList<T> data = (ArrayList<T>) query.list();
         session.getTransaction().commit();
         session.close();
