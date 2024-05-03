@@ -31,7 +31,7 @@ public class DeleteFilm extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer idFilm = Integer.parseInt(request.getParameter("idFilm"));
-        HibernateDAOImpl hibernateDAO = new HibernateDAOImpl();
+        HibernateDAO hibernateDAO = new HibernateDAOImpl();
         try {
             request.setAttribute("shows", hibernateDAO.show(Film.class));
             hibernateDAO.delete(Film.class, idFilm);

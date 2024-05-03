@@ -8,6 +8,7 @@
 
     if(session.getAttribute("login") != null){
         String login = session.getAttribute("login").toString();
+        String name = session.getAttribute("name").toString();
 
     }else{
         response.sendRedirect("authentication.jsp");
