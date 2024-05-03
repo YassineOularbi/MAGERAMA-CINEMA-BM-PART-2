@@ -3,6 +3,7 @@ package jee.javapack.dao;
 import jee.javapack.beans.FilmRating;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,26 +23,24 @@ public class FilmRatingDAOImpl implements FilmRatingDAO {
     }
 
     @Override
-    public void updateFilmRating(FilmRating filmRating) {
+    public List<FilmRating> getFilmRatings() {
+        List<FilmRating> filmRatings = new ArrayList<>();
+        try (Connection connection = ConnectionDAO.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM ratingfilm");
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                long idUser = resultSet.getLong("idUser");
+                long idFilm = resultSet.getLong("idFilm");
+                int rating = resultSet.getInt("rating");
+
+                FilmRating filmRating = new FilmRating(idUser, idFilm, rating);
+                filmRatings.add(filmRating);
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return filmRatings;
     }
 
-    @Override
-    public FilmRating getFilmRatingById(Long id) {
-        return null;
-    }
 
-    @Override
-    public List<FilmRating> getFilmRatingsByFilmId(Long filmId) {
-        return Collections.emptyList();
-    }
-
-    @Override
-    public List<FilmRating> getFilmRatingsByUserId(Long userId) {
-
-        return Collections.emptyList();
-    }
-
-    @Override
-    public void deleteFilmRating(Long id) {
-    }
 }
