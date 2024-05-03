@@ -33,33 +33,5 @@ public class FilmDAOImpl implements FilmDAO {
         }
         return highRatedFilms;
     }
-
-
-    @Override
-    public ArrayList<Film> SearchFilms(String Title) throws SQLException, ClassNotFoundException {
-        Connection connection = ConnectionDAO.getConnection();
-        ArrayList<Film> SearchFilmsRe = new ArrayList<>();
-        String requet = "SELECT * FROM  film WHERE titleFilm=?";
-        PreparedStatement statement = connection.prepareStatement(requet);
-        statement.setString(1, Title);
-        ResultSet resultat = statement.executeQuery();
-        while (resultat.next()) {
-            Integer idFilm = resultat.getInt("idFilm");
-            String titleFilm = resultat.getString("titleFilm");
-            String descriptionFilm = resultat.getString("descriptionFilm");
-            String runTimeFilm = resultat.getString("runTimeFilm");
-            String genreFilm = resultat.getString("genreFilm");
-            Date producedIn = resultat.getDate("producedIn");
-            String directedBy = resultat.getString("directedBy");
-            String pictureURL = resultat.getString("pictureURL");
-            String backgroundURL = resultat.getString("backgroundURL");
-            String ratingFilm = resultat.getString("ratingFilm");
-            String streamingNow = resultat.getString("streamingNow");
-            SearchFilmsRe.add(new Film(idFilm,  titleFilm,  descriptionFilm,  runTimeFilm,  genreFilm,  producedIn,  directedBy,  pictureURL,  backgroundURL,  ratingFilm,  streamingNow));
-        }
-        connection.close();
-        statement.close();
-        return SearchFilmsRe;
-    }
 }
 

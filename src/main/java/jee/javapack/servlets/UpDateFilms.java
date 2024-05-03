@@ -3,7 +3,6 @@ package jee.javapack.servlets;
 import db.hibernate.dao.HibernateDAO;
 import db.hibernate.dao.HibernateDAOImpl;
 import jee.javapack.beans.Film;
-import jee.javapack.dao.FilmDAOImpl;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -18,7 +17,7 @@ public class UpDateFilms extends HttpServlet {
         Integer idMovie = Integer.valueOf(request.getParameter("id"));
         HibernateDAO hibernateDAO = new HibernateDAOImpl();
         try {
-            Film foundFilm = (Film) hibernateDAO.load(Film.class, idMovie);
+            Film foundFilm = (Film) hibernateDAO.get(Film.class, idMovie);
             request.setAttribute("film", foundFilm);
         } catch (InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);

@@ -1,16 +1,14 @@
 package db.hibernate.dao;
 
 import db.hibernate.config.HibernateUtil;
-import jee.javapack.beans.Film;
-import jee.javapack.beans.Reservation;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.ArrayList;
 
 public class HibernateDAOImpl implements HibernateDAO {
-
 
     @Override
     public void save(Object C){
@@ -59,17 +57,29 @@ public class HibernateDAOImpl implements HibernateDAO {
     public <T> Object load(Class<T> C, Integer id) throws InstantiationException, IllegalAccessException {
         Session session = HibernateUtil.CreateSessionFactory(C).openSession();
         session.beginTransaction();
-        Object O = session.load(C, id);
+        Object data = session.load(C, id);
         session.getTransaction().commit();
         session.close();
-        return O;
+        return data;
     }
 
     @Override
-    public <T> ArrayList<T> get(Class<T> C, Integer id) throws InstantiationException, IllegalAccessException {
+    public <T> Object get(Class<T> C, Integer id) throws InstantiationException, IllegalAccessException {
         Session session = HibernateUtil.CreateSessionFactory(C).openSession();
         session.beginTransaction();
-        ArrayList<T> data = (ArrayList<T>) session.get(C, id);
+        Object data = session.get(C, id);
+        session.getTransaction().commit();
+        session.close();
+        return data;
+    }
+
+    @Override
+    public <T> ArrayList<T> byTitle(Class<T> C, String title) throws InstantiationException, IllegalAccessException {
+        Session session = HibernateUtil.CreateSessionFactory(C).openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("FROM " + C + " C WHERE C.titleFilm LIKE :title");
+        query.setParameter("title", title);
+        ArrayList<T> data = (ArrayList<T>) query.list();
         session.getTransaction().commit();
         session.close();
         return data;

@@ -24,12 +24,11 @@ public class SearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String titleFilm =request.getParameter("titleFilm");
         FilmDAO filmDAO = new FilmDAOImpl();
-        FilmDAO searchFilm=new FilmDAOImpl();
         HibernateDAO hibernateDAO = new HibernateDAOImpl();
         try {
             List<Film> ratingFilms = filmDAO.getHighRatedFilms();
             request.setAttribute("ratingFilms", ratingFilms);
-            request.setAttribute("trendFilms",searchFilm.SearchFilms(titleFilm));
+            request.setAttribute("trendFilms", hibernateDAO.byTitle(Film.class, titleFilm));
             request.setAttribute("films", hibernateDAO.show(Film.class));
         } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);

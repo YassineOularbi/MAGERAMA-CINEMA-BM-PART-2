@@ -25,7 +25,7 @@ public class ReserveNow extends HttpServlet {
         HibernateDAO hibernateDAO = new HibernateDAOImpl();
         Film foundFilm = null;
         try {
-            foundFilm = (Film) hibernateDAO.load(Film.class, idMovie);
+            foundFilm = (Film) hibernateDAO.get(Film.class, idMovie);
             request.setAttribute("Movie", foundFilm);
         } catch (InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
@@ -56,8 +56,7 @@ public class ReserveNow extends HttpServlet {
         Reservation reservation = new Reservation(null, idUser, idMovie, qrCode, seat, experience, offer, java.sql.Date.valueOf(dateStr), java.sql.Time.valueOf(time));
         try {
             hibernateDAO.save(reservation);
-            Film foundFilm = (Film) hibernateDAO.load(Film.class, idMovie);
-            request.setAttribute("Movie", foundFilm);
+            request.setAttribute("Movie", hibernateDAO.get(Film.class, idMovie));
         } catch (InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
