@@ -19,6 +19,9 @@ public class Comment {
         this.commentText = commentText;
     }
 
+    public Comment(long id, long idUser, long idFilm, String commentText) {
+    }
+
     public int getIdComment() {
         return idComment;
     }
