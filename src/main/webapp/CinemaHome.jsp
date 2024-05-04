@@ -25,6 +25,10 @@
     <!-- bootstrap css link -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
     <!-- Font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
           integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
@@ -77,13 +81,39 @@
                 </li>
             </form>
         </div>
-        <i class='bx bx-user bx-flip-horizontal icon rounded' style='color:white'></i>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <i class='bx bx-user bx-flip-horizontal icon rounded' style='color:white' data-bs-toggle="modal" data-bs-target="#exampleModal" type="button"></i>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
     </div>
 </nav>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark text-light">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">User account</h5>
+            </div>
+            <div class="modal-body">
+                <!-- Ajoutez ici le contenu des coordonnées de l'utilisateur -->
+                <p>Nom: ${name}</p>
+                <p>Email: ${login}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a href="Logout" type="button" class="btn btn-warning">Log out</a>
+                <a href="reserve-history" class="btn btn-danger text-light">Reservation<i class='bx bxs-coupon' style='color:#ffffff'></i></a>
+                <a href="playlist" class="btn btn-success text-light">My Playlist<i class='bx bxs-collection' style='color:#ffffff'></i></a>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
 <section class="movie-trend">
     <c:if test="${not empty trendFilms}">
         <img style="z-index: -1000; width: 1300px; position: absolute; top: 0; left: 0;" src="${trendFilms[0].getBackgroundURL()}">
@@ -102,17 +132,21 @@
             <div class="buttons text-light">
                 <button class="btn text-light mt-2">More details <i class='bx bxs-right-arrow'
                                                                     style='color:#ffffff'></i></button>
-                <button class="btn text-light mt-2">View trailer <i class='bx bxs-show'
-                                                                    style='color:#ffffff'></i></button>
+
+                <button class="btn btn-open  text-light mt-2 " >View trailer <i class='bx bxs-show'
+                                                                                style='color:#ffffff'></i></button>
                 <button class="btn btn-book text-light mt-2">Book Now <i class='bx bxs-coupon'
                                                                          style='color:#ffffff'></i></button>
             </div>
         </div>
     </c:if>
 
-
+    <c:if test="${empty trendFilms}">
+        <h1 style="padding: 200px; color: white">MOVIE NOT FOUND</h1>
+    </c:if>
 
 </section>
+
 
 <section style="height: 300px; padding-left: 50px;" class="movie-card-section">
     <div id="slider">
@@ -153,7 +187,14 @@
                             <h2 class="card__title">${film.titleFilm}</h2>
                             <p class="card__description">${film.descriptionFilm}</p>
                         </div>
-                        <a href="${pageContext.request.contextPath}/reserve-now?id=${film.getIdFilm()}" class="btn card__button text-light mt-2 rounded align-items-center">Book <i class='bx bxs-coupon' style='color:#ffffff; margin-left: 5px;'></i></a>
+
+                        <div class="button-container">
+
+                            <a href="${pageContext.request.contextPath}/reserve-now?id=${film.getIdFilm()}"  class="btn btn-book cardbutton text-light mt-2 rounded align-items-center" style="background-color: #D90404C6;">Book <i class='bx bxs-coupon' style='color:#ffffff; margin-left: 5px;'></i></a>
+                            <a href="view.jsp" class="btn-save btn cardbutton text-light mt-2 rounded align-items-center" style="background-color: transparent; border: 1px solid #D90404C6;"><i class='bx bxs-show' style='color:#D90404C6'></i></a>
+
+                        </div>
+
                     </div>
 
                 </article>
@@ -170,15 +211,21 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <!-- JavaScript Link -->
-<script><%@include file="js/script.js"%></script>
+
 <!-- JavaScript Link -->
 
 <!-- bootstrap js link -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+
 <!-- bootstrap js link -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

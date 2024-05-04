@@ -39,7 +39,8 @@ public class UpDateFilms extends HttpServlet {
         String ratingFilm = request.getParameter("ratingFilm");
         String backgroundURL = request.getParameter("backgroundURL");
         String streamingNow = request.getParameter("streamingNow");
-        Film film = new Film(idFilm, titleFilm, descriptionFilm, runTimeFilm, genreFilm, producedIn, directedBy, pictureURL, backgroundURL, ratingFilm, streamingNow);
+        String trailer = request.getParameter("trailer");
+        Film film = new Film(idFilm, titleFilm, descriptionFilm, runTimeFilm, genreFilm, producedIn, directedBy, pictureURL, backgroundURL, ratingFilm, streamingNow, trailer);
         try {
             hibernateDAO.merge(film);
             request.setAttribute("shows", hibernateDAO.show(Film.class));
