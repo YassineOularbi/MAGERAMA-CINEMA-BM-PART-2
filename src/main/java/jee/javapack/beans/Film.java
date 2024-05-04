@@ -142,14 +142,15 @@ public class Film {
                 "idFilm=" + idFilm +
                 ", titleFilm='" + titleFilm + '\'' +
                 ", descriptionFilm='" + descriptionFilm + '\'' +
-                ", runTimeFilm=" + runTimeFilm +
+                ", runTimeFilm='" + runTimeFilm + '\'' +
                 ", genreFilm='" + genreFilm + '\'' +
                 ", producedIn=" + producedIn +
                 ", directedBy='" + directedBy + '\'' +
                 ", pictureURL='" + pictureURL + '\'' +
                 ", backgroundURL='" + backgroundURL + '\'' +
                 ", ratingFilm='" + ratingFilm + '\'' +
-                ", streamingNow=" + streamingNow +
+                ", streamingNow='" + streamingNow + '\'' +
+                ", trailer='" + trailer + '\'' +
                 '}';
     }
 }

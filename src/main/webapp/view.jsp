@@ -1,5 +1,7 @@
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language = "java" %>
+<%@ page import = "java.sql.*" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,16 +84,16 @@
         </button>
     </div>
 </nav>
-
+<!-- video -->
 <div class="container mt-4">
     <div class="flex flex-col justify-content-center align-items-center">
         <div class="flex flex-col gap-1 items-center mt-3">
-            <h1 class="text-shadow colored-text font-weight-bold text-white">Game of Thrones</h1>
+            <h1 class="text-shadow colored-text font-weight-bold text-white">${Movie.getTitleFilm()}</h1>
         </div>
     </div>
     <div class="flex flex-col justify-content-center align-items-center">
         <div class="d-flex justify-content-center min-width-200">
-            <iframe width="960" height="515"  src="${film.trailer}"></iframe>
+            <iframe width="960" height="515"  src="${Movie.getTrailer()}"></iframe>
         </div>
     </div>
     <br>
@@ -128,66 +130,43 @@
 
 <!-- Comment Form Section -->
 <div class="container d-flex flex-column align-items-center justify-content-center rounded-5 p-3 my-5"
-     style="background-image: url('./'); background-position: center; background-size: cover;">
-    <form class="col-lg-6">
+     style=" background-position: center; background-size: cover;">
+    <form class="col-lg-6" action="view-now" method="post">
         <h2 class="text-center mb-3">Leave a Reply</h2>
+        <input type="hidden" name="filmId" value="${Movie.getIdFilm()}">
         <div class="form-group">
-            <input type="text" class="form-control" id="nameInput" placeholder="Enter your name">
+
+            <input type="hidden" class="form-control" id="nameInput" placeholder="Enter your name">
         </div>
         <div class="form-group mt-3">
-            <input type="email" class="form-control" id="emailInput" placeholder="Enter your email">
+            <input type="hidden" class="form-control" id="emailInput" placeholder="Enter your email">
         </div>
         <div class="form-group mt-3">
-            <textarea class="form-control" id="commentTextarea" rows="3" placeholder="Your comment"></textarea>
+            <textarea class="form-control" id="commentText" rows="3" placeholder="Your comment" name="commentText"></textarea>
         </div>
+        <button type="submit" class="btn btn-dark mt-3" id="submitButton">Post comment</button>
     </form>
-    <button type="button" class="btn btn-dark mt-3" id="submitButton">Post comment</button>
-    <div class="container col-lg-6 mt-5" id="commentsSection">
-        <!-- comment ici -->
-    </div>
+
+
+
+
 </div>
+
 <div class="container mt-5">
     <h1 class="text-dark mb-4">Recent Comments</h1>
-    <div class="row align-items-center gap-2">
-        <div class="col-md-2">
-            <h5>John Doe</h5>
-            <img src="./img/profile.jpg" class="img-fluid" alt="User Image">
-        </div>
-        <div class="col-md-6">
-            <p class="mt-2">"A captivating emotional journey that takes you on a whirlwind of adventure and
-                suspense."</p>
-        </div>
-    </div><br>
-    <div class="row align-items-center gap-2">
-        <div class="col-md-2">
-            <h5>John Doe</h5>
-            <img src="./img/profile.jpg" class="img-fluid" alt="User Image">
-        </div>
-        <div class="col-md-6">
-            <p class="mt-2">"A captivating emotional journey that takes you on a whirlwind of adventure and
-                suspense."</p>
-        </div>
-    </div><br>
-    <div class="row align-items-center gap-2">
-        <div class="col-md-2">
-            <h5>John Doe</h5>
-            <img src="./img/profile.jpg" class="img-fluid" alt="User Image">
-        </div>
-        <div class="col-md-6">
-            <p class="mt-2">"A captivating emotional journey that takes you on a whirlwind of adventure and
-                suspense."</p>
-        </div>
-    </div><br>
-    <div class="row align-items-center gap-2">
-        <div class="col-md-2">
-            <h5>John Doe</h5>
-            <img src="./img/profile.jpg" class="img-fluid" alt="User Image">
-        </div>
-        <div class="col-md-6">
-            <p class="mt-2">"A captivating emotional journey that takes you on a whirlwind of adventure and
-                suspense."</p>
-        </div>
-    </div>
+    <c:forEach var="show" items="${shows}">
+        <div class="row align-items-center gap-2  border-top">
+            <div class="col-md-2 d-flex align-items-center ">
+                <img src="img/user.jpg" class="img-fluid" alt="User Image" width="30px" height="30px">
+                <h5>${UserName}</h5>
+            </div>
+            <div class="col-md-6">
+                <p class="mt-2">${show.getCommentText()}</p>
+            </div>
+        </div><br>
+
+    </c:forEach>
+
 </div>
 
 

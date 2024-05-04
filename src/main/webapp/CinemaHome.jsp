@@ -154,7 +154,7 @@
                         <div class="button-container">
 
                             <a href="${pageContext.request.contextPath}/reserve-now?id=${film.getIdFilm()}"  class="btn btn-book cardbutton text-light mt-2 rounded align-items-center" style="background-color: #D90404C6;">Book <i class='bx bxs-coupon' style='color:#ffffff; margin-left: 5px;'></i></a>
-                            <a href="view.jsp" class="btn-save btn cardbutton text-light mt-2 rounded align-items-center" style="background-color: transparent; border: 1px solid #D90404C6;"><i class='bx bxs-show' style='color:#D90404C6'></i></a>
+                            <a href="${pageContext.request.contextPath}/view-now?id=${film.getIdFilm()}" class="btn-save btn cardbutton text-light mt-2 rounded align-items-center" style="background-color: transparent; border: 1px solid #D90404C6;"><i class='bx bxs-show' style='color:#D90404C6'></i></a>
 
                         </div>
 
