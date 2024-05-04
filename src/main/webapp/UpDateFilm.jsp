@@ -210,6 +210,10 @@
                         <input type="text" class="form-control" id="backgroundURL" name="backgroundURL" value="${film.getBackgroundURL()}">
                         <label for="backgroundURL">URL de l'arrière-plan</label>
                     </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="trailer" name="trailer" value="${film.getTrailer()}">
+                        <label for="trailer">Trailer</label>
+                    </div>
                     <button type="submit" class="btn btn-primary" value="UpDateFilm" > Edit </button>
                 </form>
             </div>

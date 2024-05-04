@@ -15,7 +15,7 @@ public class CommentDAOImpl implements CommentDAO {
     @Override
     public void addComment(Comment comment) {
         try (Connection connection = ConnectionDAO.getConnection();
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO CommentFilm (idUser, idFilm, commentText) VALUES (?, ?, ?)")) {
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO CommentFilm (id, idFilm, commentText) VALUES (?, ?, ?)")) {
             statement.setLong(1, comment.getIdUser());
             statement.setLong(2, comment.getIdFilm());
             statement.setString(3, comment.getCommentText());
@@ -58,6 +58,4 @@ public class CommentDAOImpl implements CommentDAO {
             e.printStackTrace();
         }
     }
-
-
 }
