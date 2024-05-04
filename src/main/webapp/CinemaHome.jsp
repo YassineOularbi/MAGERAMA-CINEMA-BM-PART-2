@@ -4,11 +4,8 @@
 <%@ page import = "java.sql.*" %>
 
 <%
-
-
     if(session.getAttribute("login") != null){
         String login = session.getAttribute("login").toString();
-
     }else{
         response.sendRedirect("authentication.jsp");
     }
@@ -138,9 +135,6 @@
             </div>
         </div>
     </c:if>
-
-
-
 </section>
 
 <section style="height: 300px; padding-left: 50px;" class="movie-card-section">
@@ -163,7 +157,6 @@
     </div>
 </section>
 
-
 <section class="showtimes" style="height: 100vh; width: 100%; background-color: black; padding-top: 40px; padding-left: 50px;">
     <p style="font-size: 20px; text-align: start; font-weight: bold;" class="text-light">ShowTimes</p>
     <div>
@@ -181,36 +174,71 @@
                             <p class="card__description">${film.descriptionFilm}</p>
                             <!-- Book and Save Buttons in the Same Line with Space -->
                             <div class="button-container">
-                                <button class="btn-save btn card__button text-light mt-2 rounded align-items-center">Save <i class='bx bxs-save' style='color:#ffffff; margin-left: 5px;'></i></button>
+
                                 <a href="${pageContext.request.contextPath}/reserve-now?id=${film.getIdFilm()}" class="btn btn-book card__button text-light mt-2 rounded align-items-center">Book <i class='bx bxs-coupon' style='color:#ffffff; margin-left: 5px;'></i></a>
+                                <a href="#" class="btn-save btn card__button text-light mt-2 rounded align-items-center" style="background: transparent; border: none;" data-movie-id="${film.idFilm}"><i class='bx bxs-bookmark icon-save' style='color: white; margin-left: 5px;'></i></a>
+
                             </div>
+
                         </div>
                     </div>
                 </article>
             </div>
         </c:forEach>
-
     </div>
 </section>
 
+<!-- Ajoutez cette section dans votre HTML -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-success text-light">
+            <strong class="me-auto">Success</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Added successfully to your playlist!
+        </div>
+    </div>
+</div>
+
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const saveButtons = document.querySelectorAll('.btn-save');
+        const saveLinks = document.querySelectorAll('.btn-save');
 
-        saveButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Toggle 'Saved' and 'Save' text
-                if (button.textContent === 'Save') {
-                    button.textContent = 'Saved';
-                    button.classList.add('saved');
-                } else {
-                    button.textContent = 'Save';
-                    button.classList.remove('saved');
-                }
+        saveLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default link behavior
+                const icon = link.querySelector('.icon-save');
+                icon.style.color = (icon.style.color === 'gold') ? 'white' : 'gold';
+
+                // Get the movie ID from data attribute
+                const movieId = link.getAttribute('data-movie-id');
+
+                // Send an AJAX request to save the movie
+                $.ajax({
+                    type: 'POST',
+                    url: 'SaveMovieServlet', // Update with your servlet URL
+                    data: { movieId: movieId },
+                    success: function(response) {
+                        $('.toast-body').html(response.message);
+                        $('.toast').toast('show');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
             });
         });
     });
+
 </script>
+
+<style>
+    .icon-save {
+        font-size: 1.5rem; /* Adjust the size as needed */
+    }
+</style>
 
 
 
@@ -218,7 +246,9 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <!-- JavaScript Link -->
-<script><%@include file="js/script.js"%></script>
+<script>
+    <%@include file="js/script.js" %>
+</script>
 <!-- JavaScript Link -->
 
 <!-- bootstrap js link -->

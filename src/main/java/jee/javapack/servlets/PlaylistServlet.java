@@ -9,6 +9,8 @@ import java.io.IOException;
 public class PlaylistServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
         // Forward the request to playlist.jsp
         request.getRequestDispatcher("/playlist.jsp").forward(request, response);
     }
