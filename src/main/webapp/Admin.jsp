@@ -277,6 +277,7 @@
                             <th scope="col">Background</th>
                             <th scope="col">Rating</th>
                             <th scope="col">Streaming Now</th>
+                            <th scope="col">Trailer </th>
                             <th scope="col">Action</th>
                         </tr>
                         </thead>
@@ -294,6 +295,7 @@
                                 <td>${show.getBackgroundURL()}</td>
                                 <td>${show.getRatingFilm()}</td>
                                 <td>${show.getStreamingNow()}</td>
+                                <td>${show.getTrailer()}</td>
 
                                 <td>
                                         <a href="UpDateFilms?id=${show.getIdFilm()}" class="btn btn-primary">Update</a>

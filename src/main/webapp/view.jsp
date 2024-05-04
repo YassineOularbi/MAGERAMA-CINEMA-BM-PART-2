@@ -86,7 +86,7 @@
 <div class="container mt-4">
     <div class="flex flex-col justify-content-center align-items-center">
         <div class="flex flex-col gap-1 items-center mt-3">
-            <h1 class="text-shadow colored-text font-weight-bold text-white mb-4 ">Game of Thrones</h1>
+            <h1 class="text-shadow colored-text font-weight-bold text-white">Game of Thrones</h1>
         </div>
     </div>
     <div class="flex flex-col justify-content-center align-items-center">
@@ -200,3 +200,4 @@
 </body>
 
 </html>
+

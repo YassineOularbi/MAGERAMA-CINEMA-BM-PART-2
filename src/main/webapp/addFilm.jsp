@@ -209,6 +209,10 @@
                         <input type="text" class="form-control" id="backgroundURL" name="backgroundURL">
                         <label for="backgroundURL">Background URL</label>
                     </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="trailer" name="trailer">
+                        <label for="trailer">Trailer </label>
+                    </div>
                     <button type="submit" class="btn btn-primary">Add</button>
                 </form>
 
