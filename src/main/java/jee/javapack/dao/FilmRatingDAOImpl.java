@@ -29,9 +29,9 @@ public class FilmRatingDAOImpl implements FilmRatingDAO {
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM ratingfilm");
              ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
-                long idUser = resultSet.getLong("idUser");
-                long idFilm = resultSet.getLong("idFilm");
-                int rating = resultSet.getInt("rating");
+                Integer idUser = resultSet.getInt("idUser");
+                Integer idFilm = resultSet.getInt("idFilm");
+                Integer rating = resultSet.getInt("rating");
 
                 FilmRating filmRating = new FilmRating(idUser, idFilm, rating);
                 filmRatings.add(filmRating);

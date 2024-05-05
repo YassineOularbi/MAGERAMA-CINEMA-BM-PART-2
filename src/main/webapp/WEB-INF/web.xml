@@ -77,17 +77,6 @@
         <url-pattern>/reserve-history</url-pattern>
     </servlet-mapping>
 
-
-
-
-
-
-
-
-
-
-
-
     <servlet>
         <servlet-name>ReservationTicket</servlet-name>
         <servlet-class>jee.javapack.servlets.ReservationTicket</servlet-class>
@@ -95,6 +84,15 @@
     <servlet-mapping>
         <servlet-name>ReservationTicket</servlet-name>
         <url-pattern>/reservation-ticket</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CommentServlet</servlet-name>
+        <servlet-class>jee.javapack.servlets.CommentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CommentServlet</servlet-name>
+        <url-pattern>/view-now</url-pattern>
     </servlet-mapping>
 
 </web-app>

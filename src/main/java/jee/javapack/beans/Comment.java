@@ -1,13 +1,19 @@
 package jee.javapack.beans;
 
-import java.time.LocalDateTime;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "commentfilm")
 public class Comment {
-    private int idComment;
-    private int idUser;
-    private int idFilm;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idComment;
+    @Column(name = "id")
+    private Integer idUser;
+    private Integer idFilm;
     private String commentText;
-    private LocalDateTime commentDate;
+
 
     public Comment() {
 
@@ -54,13 +60,6 @@ public class Comment {
         this.commentText = commentText;
     }
 
-    public LocalDateTime getCommentDate() {
-        return commentDate;
-    }
-
-    public void setCommentDate(LocalDateTime commentDate) {
-        this.commentDate = commentDate;
-    }
 
     @Override
     public String toString() {
@@ -69,7 +68,6 @@ public class Comment {
                 ", idUser=" + idUser +
                 ", idFilm=" + idFilm +
                 ", commentText='" + commentText + '\'' +
-                ", commentDate=" + commentDate +
                 '}';
     }
 

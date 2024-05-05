@@ -19,9 +19,9 @@ public class FilmRatingServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        long filmId = Long.parseLong(request.getParameter("filmId"));
-        long userId = Long.parseLong(request.getParameter("userId"));
-        int rating = Integer.parseInt(request.getParameter("rating"));
+        Integer filmId = Integer.parseInt(request.getParameter("filmId"));
+        Integer userId = Integer.parseInt(request.getParameter("id"));
+        Integer rating = Integer.parseInt(request.getParameter("rating"));
 
         FilmRating filmRating = new FilmRating(filmId, userId, rating);
         filmRatingDAO.addFilmRating(filmRating);

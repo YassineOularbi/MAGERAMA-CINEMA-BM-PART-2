@@ -189,6 +189,7 @@ p {
   justify-content: space-between;
   align-self: flex-end;
   height: 70%;
+    width: 100%;
   padding: 12% 1.25rem 1.875rem;
   background: linear-gradient(
     180deg,

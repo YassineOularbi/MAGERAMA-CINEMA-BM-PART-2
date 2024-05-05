@@ -3,14 +3,12 @@ package jee.javapack.servlets;
 import db.hibernate.dao.HibernateDAO;
 import db.hibernate.dao.HibernateDAOImpl;
 import jee.javapack.beans.Film;
-import jee.javapack.dao.FilmDAOImpl;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.Date;
-import java.sql.SQLException;
 
 @WebServlet(name = "AddFilmServlet", value = "/addFilm")
 public class AddFilmServlet extends HttpServlet {

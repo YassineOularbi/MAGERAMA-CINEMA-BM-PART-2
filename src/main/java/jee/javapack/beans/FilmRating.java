@@ -1,60 +1,57 @@
 package jee.javapack.beans;
 
+import javax.persistence.*;
 import java.util.Date;
-
+@Entity
 public class FilmRating {
-    private Long idRating;
-    private Long idUser;
-    private Long idFilm;
-    private int rating;
-    private Date ratingDate;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idRating;
+    @Column(name = "id")
+    private Integer idUser;
+    private Integer idFilm;
+    private Integer rating;
+
 
     public FilmRating() {
     }
 
-    public FilmRating(Long idFilm, Long idUser, int rating) {
+    public FilmRating(Integer idFilm, Integer idUser, Integer rating) {
         this.idFilm = idFilm;
         this.idUser = idUser;
         this.rating = rating;
     }
 
-    public Long getIdRating() {
+    public Integer getIdRating() {
         return idRating;
     }
 
-    public void setIdRating(Long idRating) {
+    public void setIdRating(Integer idRating) {
         this.idRating = idRating;
     }
 
-    public Long getIdUser() {
+    public Integer getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(Long idUser) {
+    public void setIdUser(Integer idUser) {
         this.idUser = idUser;
     }
 
-    public Long getIdFilm() {
+    public Integer getIdFilm() {
         return idFilm;
     }
 
-    public void setIdFilm(Long idFilm) {
+    public void setIdFilm(Integer idFilm) {
         this.idFilm = idFilm;
     }
 
-    public int getRating() {
+    public Integer getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(Integer rating) {
         this.rating = rating;
     }
 
-    public Date getRatingDate() {
-        return ratingDate;
-    }
-
-    public void setRatingDate(Date ratingDate) {
-        this.ratingDate = ratingDate;
-    }
 }

@@ -11,6 +11,7 @@ p a {
     text-decoration: none;
 }
 
+
 body {
     font-family: "Poppins", sans-serif;
     background-color:#000;
@@ -35,5 +36,10 @@ body {
 
 .text-shadow {
     text-shadow: 1px 6px 3px #8C092D;
-; /* Adjust the shadow properties as needed */
+    margin-top: 80px;
+}
+
+h5{
+    padding-left: 18px;
+
 }
