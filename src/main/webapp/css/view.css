@@ -38,8 +38,78 @@ body {
     text-shadow: 1px 6px 3px #8C092D;
     margin-top: 80px;
 }
+.card {
 
-h5{
-    padding-left: 18px;
+    border: none;
+    box-shadow: 5px 6px 6px 2px #320a0a;
+    border-radius: 4px;
+    background-color: #0c0e12;
+}
+
+
+.dots{
+
+    height: 4px;
+    width: 4px;
+    margin-bottom: 2px;
+    background-color: #232323;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.badge{
+
+    padding: 7px;
+    padding-right: 9px;
+    padding-left: 16px;
+    box-shadow: 5px 6px 6px 2px #320a0a;
+}
+
+.user-img{
+
+    margin-top: 4px;
+}
+
+.check-icon{
+
+    font-size: 17px;
+    color: #040404;
+    top: 1px;
+    position: relative;
+    margin-left: 3px;
+}
+
+.form-check-input{
+    margin-top: 6px;
+    margin-left: -24px !important;
+    cursor: pointer;
+}
+
+
+.form-check-input:focus{
+    box-shadow: none;
+}
+
+
+.icons i{
+
+    margin-left: 8px;
+}
+.reply{
+
+    margin-left: 12px;
+}
+
+.reply small{
+
+    color: #303030;
+
+}
+
+
+.reply small:hover{
+
+    color: green;
+    cursor: pointer;
 
 }

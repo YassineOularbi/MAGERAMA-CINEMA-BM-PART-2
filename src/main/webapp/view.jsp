@@ -84,7 +84,11 @@
         </button>
     </div>
 </nav>
+
+
 <!-- video -->
+
+
 <div class="container mt-4">
     <div class="flex flex-col justify-content-center align-items-center">
         <div class="flex flex-col gap-1 items-center mt-3">
@@ -128,7 +132,7 @@
 </div>
 
 
-<!-- Comment Form Section -->
+            <!-- Comment Form Section -->
 <div class="container d-flex flex-column align-items-center justify-content-center rounded-5 p-3 my-5"
      style=" background-position: center; background-size: cover;">
     <form class="col-lg-6" action="view-now" method="post">
@@ -142,16 +146,92 @@
             <input type="hidden" class="form-control" id="emailInput" placeholder="Enter your email">
         </div>
         <div class="form-group mt-3">
-            <textarea class="form-control" id="commentText" rows="3" placeholder="Your comment" name="commentText"></textarea>
+            <textarea class="form-control bg-dark" id="commentText" rows="3" placeholder="Your comment" name="commentText"></textarea>
         </div>
         <button type="submit" class="btn btn-dark mt-3" id="submitButton">Post comment</button>
     </form>
 
-
-
-
 </div>
 
+<%-- exlkdnjkelzjfnrkejfn --%>
+
+<div class="container mt-5">
+
+    <div class="row  d-flex justify-content-center">
+
+        <div class="col-md-8">
+
+            <div class="headings d-flex justify-content-between align-items-center mb-3">
+                <h5 style="color: white">Unread comments(6)</h5>
+
+                <div class="buttons">
+
+                            <span class="badge bg-black d-flex flex-row align-items-center">
+                                <span class="text-danger">Comments "ON"</span>
+                                <div class="form-check form-switch">
+                                  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+
+                                </div>
+                            </span>
+
+                </div>
+
+            </div>
+
+
+            <c:forEach var="show" items="${shows}">
+                <div class="card p-3  bg-dark">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div class="user d-flex flex-row align-items-center">
+
+                            <img src="https://i.imgur.com/hczKIze.jpg" width="30" class="user-img rounded-circle mr-2">
+                            <span><small class="font-weight-bold text-danger" style="padding-left: 10px;">${UserName}</small> <br><small class="font-weight-bold text-white  " style="padding-left: 20px">${show.getCommentText()}</small></span>
+
+                        </div>
+
+
+                        <small>2 days ago</small>
+
+                    </div>
+
+
+                    <div class="action d-flex justify-content-between mt-2 align-items-center">
+
+                        <div class="reply px-4">
+                            <small>Remove</small>
+                            <span class="dots"></span>
+                            <small>Reply</small>
+                            <span class="dots"></span>
+                            <small>Translate</small>
+
+                        </div>
+
+                        <div class="icons align-items-center">
+
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-check-circle-o check-icon"></i>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </c:forEach>
+        </div>
+
+
+
+
+
+
+
+
+    <%--
 <div class="container mt-5">
     <h1 class="text-dark mb-4">Recent Comments</h1>
     <c:forEach var="show" items="${shows}">
@@ -169,7 +249,7 @@
 
 </div>
 
-
+--%>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
