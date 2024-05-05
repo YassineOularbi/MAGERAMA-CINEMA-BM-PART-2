@@ -13,20 +13,20 @@ public class Comment {
     private Integer idUser;
     private Integer idFilm;
     private String commentText;
+    private Integer rating;
 
 
     public Comment() {
 
     }
 
-    public Comment(int idUser, int idFilm, String commentText) {
+    public Comment(int idUser, int idFilm, String commentText,Integer rating) {
         this.idUser = idUser;
         this.idFilm = idFilm;
         this.commentText = commentText;
+        this.rating = rating;
     }
 
-    public Comment(long id, long idUser, long idFilm, String commentText) {
-    }
 
     public int getIdComment() {
         return idComment;
@@ -59,6 +59,12 @@ public class Comment {
     public void setCommentText(String commentText) {
         this.commentText = commentText;
     }
+    public Integer getRating() {
+        return rating;
+    }
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
 
 
     @Override
@@ -68,12 +74,8 @@ public class Comment {
                 ", idUser=" + idUser +
                 ", idFilm=" + idFilm +
                 ", commentText='" + commentText + '\'' +
+                ", rating=" + rating +
                 '}';
     }
 
-    public void setUserId(Long userId) {
-    }
-
-    public void setFilmId(Long filmId) {
-    }
 }

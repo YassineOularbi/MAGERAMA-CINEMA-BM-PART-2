@@ -4,8 +4,6 @@ import db.hibernate.dao.HibernateDAO;
 import db.hibernate.dao.HibernateDAOImpl;
 import jee.javapack.beans.Comment;
 import jee.javapack.beans.Film;
-import jee.javapack.dao.CommentDAO;
-import jee.javapack.dao.CommentDAOImpl;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -14,7 +12,7 @@ import java.io.IOException;
 
 @WebServlet(name = "CommentServlet", value = "/CommentServlet")
 public class CommentServlet extends HttpServlet {
-    private final CommentDAO commentDAO = new CommentDAOImpl();
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,10 +46,11 @@ public class CommentServlet extends HttpServlet {
         Integer userId = (Integer) session.getAttribute("id");
         Integer filmId = Integer.valueOf(request.getParameter("filmId"));
         String commentText = request.getParameter("commentText");
+        Integer rating = Integer.valueOf(request.getParameter("rating"));
         System.out.println(commentText);
         System.out.println(userId);
         System.out.println(filmId);
-        Comment comment = new Comment(userId, filmId, commentText);
+        Comment comment = new Comment(userId, filmId, commentText,rating);
         try {
             hibernateDAO.save(comment);
             request.setAttribute("shows", hibernateDAO.show(Comment.class));
