@@ -236,6 +236,22 @@ input {
     background-size: cover;
     animation: changeBackground 30s linear infinite;
 }
+::-webkit-scrollbar {
+    width: 3px;
+    height:3px;
+}
+
+::-webkit-scrollbar-track {
+    background: #333333;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(211, 9, 9);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(117, 3, 3, 0.78);
+}
 
 @keyframes changeBackground {
     0%, 20% { background-image: url('/images/bg1.jpg'); }

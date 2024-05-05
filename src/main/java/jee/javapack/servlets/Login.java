@@ -36,16 +36,15 @@ public class Login extends HttpServlet {
             }
             this.getServletContext().getRequestDispatcher("/Admin.jsp").forward(request, response);
         } else if("user".equals(role)){
-            List<Film> ratingFilms = null;
             try {
-                ratingFilms = filmDAO.getHighRatedFilms();
+                List<Film> ratingFilms = filmDAO.getHighRatedFilms();
                 request.setAttribute("ratingFilms", ratingFilms);
-                request.setAttribute("trendFilms", ratingFilms);
+                request.setAttribute("trendFilms", ratingFilms.get(0));
                 request.setAttribute("films", hibernateDAO.show(Film.class));
             } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
                 throw new RuntimeException(e);
             }
-            request.getRequestDispatcher("/CinemaHome.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/CinemaHome.jsp").forward(request, response);
         } else if("notfound".equals(role)){
             response.sendRedirect("authentication.jsp");
         }

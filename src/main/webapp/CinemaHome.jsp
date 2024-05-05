@@ -67,31 +67,54 @@
                 </li>
             </form>
         </div>
-        <i class='bx bx-user bx-flip-horizontal icon rounded' style='color:white'></i>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <i class='bx bx-user bx-flip-horizontal icon rounded' style='color:white' data-bs-toggle="modal" data-bs-target="#exampleModal" type="button"></i>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
     </div>
 </nav>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark text-light">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">User account</h5>
+            </div>
+            <div class="modal-body">
+                <!-- Ajoutez ici le contenu des coordonnées de l'utilisateur -->
+                <p>Nom: ${name}</p>
+                <p>Email: ${login}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a href="Logout" type="button" class="btn btn-warning">Log out</a>
+                <a href="reserve-history" class="btn btn-danger text-light">Reservation<i class='bx bxs-coupon' style='color:#ffffff'></i></a>
+                <a href="playlist" class="btn btn-success text-light">My Playlist<i class='bx bxs-collection' style='color:#ffffff'></i></a>
 
+            </div>
+
+
+        </div>
+    </div>
+</div>
 
 <section class="movie-trend">
     <c:if test="${not empty trendFilms}">
-        <img style="z-index: -1000; width: 1300px; position: absolute; top: 0; left: 0;" src="${trendFilms[0].getBackgroundURL()}">
+        <img style="z-index: -1000; width: 1300px; position: absolute; top: 0; left: 0;" src="${trendFilms.getBackgroundURL()}">
         <div style="width: 40%; padding-top: 50px; padding-left: 120px;" class="text-white my-4">
-            <img style="height: 250px; width: 170px; margin: 10px 0;" class="card" src="${trendFilms[0].getPictureURL()}" alt="${trendFilms[0].getTitleFilm()}">
-            <p style="font-size: 11px; text-align: start;">${trendFilms[0].getRunTimeFilm()} -<span> ${trendFilms[0].getProducedIn()} -</span><span
-                    style="font-weight: bold;">${trendFilms[0].getDirectedBy()}</span></p>
+            <img style="height: 250px; width: 170px; margin: 10px 0;" class="card" src="${trendFilms.getPictureURL()}" alt="${trendFilms.getTitleFilm()}">
+            <p style="font-size: 11px; text-align: start;">${trendFilms.getRunTimeFilm()} -<span> ${trendFilms.getProducedIn()} -</span><span
+                    style="font-weight: bold;">${trendFilms.getDirectedBy()}</span></p>
             <p style="font-size: 11px; text-align: start;"><span class="text-success">92% Match </span><span
                     class="border rounded px-1 mx-2">TV - MA</span><span style="font-weight: bold;"
                                                                          class="border rounded px-1 mx-1 ">HD</span><span
-                    style='color:#fdb000; background: rgba(0, 0, 0, 0.6);' class="rounded border px-2 mx-1">${trendFilms[0].getRatingFilm()} <i
+                    style='color:#fdb000; background: rgba(0, 0, 0, 0.6);' class="rounded border px-2 mx-1">${trendFilms.getRatingFilm()} <i
                     class='bx bxs-star' style='color:#fdb000'></i></span></p>
-            <h4 style="text-align: start;">${trendFilms[0].titleFilm}</h4>
-            <p style="font-size: 15px; text-align: start;">${trendFilms[0].genreFilm}</p>
-            <p style="font-size: 10px; text-align: start;">${trendFilms[0].descriptionFilm}</p>
+            <h4 style="text-align: start;">${trendFilms.getTitleFilm()}</h4>
+            <p style="font-size: 15px; text-align: start;">${trendFilms.getGenreFilm()}</p>
+            <p style="font-size: 10px; text-align: start;">${trendFilms.getDescriptionFilm()}</p>
             <div class="buttons text-light">
                 <button class="btn text-light mt-2">More details <i class='bx bxs-right-arrow'
                                                                     style='color:#ffffff'></i></button>
@@ -103,14 +126,35 @@
             </div>
         </div>
     </c:if>
-
     <c:if test="${empty trendFilms}">
         <h1 style="padding: 200px; color: white">MOVIE NOT FOUND</h1>
     </c:if>
 
 </section>
 
-
+<c:if test="${not empty searchedFilm}">
+<section style="height: 300px; padding-left: 50px; margin-bottom: 200px;" class="movie-card-section">
+    <div id="slider">
+        <p style="font-size: 20px; text-align: start; font-weight: bold;" class="text-light">Search Result</p>
+        <div class="d-flex flex-row">
+            <div style="width: 98%;" class="cards row">
+                <div class="swiper">
+                    <div style="" class="swiper-wrapper cards row">
+                        <c:forEach var="film" items="${searchedFilm}" varStatus="loop">
+                            <div class="movie-card-trend text-white">
+                                <a href="s?id=${film.getIdFilm()}">
+                                    <img style="height: 220px; width: 150px; margin-top: 20px;" class="card" src="${film.getPictureURL()}" alt="${film.getTitleFilm()}">
+                                    <p>${film.getTitleFilm()}</p>
+                                </a>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</c:if>
 <section style="height: 300px; padding-left: 50px;" class="movie-card-section">
     <div id="slider">
         <p style="font-size: 20px; text-align: start; font-weight: bold;" class="text-light">Trending Now !</p>
@@ -120,8 +164,10 @@
                     <div style="" class="swiper-wrapper cards row">
                         <c:forEach var="film" items="${ratingFilms}" varStatus="loop">
                             <div class="movie-card-trend text-white">
-                                <img style="height: 220px; width: 150px; margin-top: 20px;" class="card" src="${film.pictureURL}" alt="${film.titleFilm}">
+                                <a href="s?id=${film.getIdFilm()}">
+                                <img style="height: 220px; width: 150px; margin-top: 20px;" class="card" src="${film.getPictureURL()}" alt="${film.getTitleFilm()}">
                                 <h1 style="font-size: 60px; font-weight: bold; opacity: 90%; z-index: 1000; margin-top: -55px; margin-left: -10px;" >${loop.index + 1}</h1>
+                                </a>
                             </div>
                         </c:forEach>
                     </div>
@@ -130,7 +176,6 @@
         </div>
     </div>
 </section>
-
 
 <section  class="showtimes" style="height: 100vh; width: 100%; background-color: black; padding-top: 40px; padding-left: 50px;" >
     <p style="font-size: 20px; text-align: start; font-weight: bold;" class="text-light">ShowTimes</p>
