@@ -1,23 +1,40 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: DELL
-  Date: 21/04/2024
-  Time: 03:18
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language = "java" %>
-<%@ page import = "java.sql.*" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="java.io.IOException" %>
+
+<%!
+    // Fonction pour formater la date SQL
+    public String formatDateFromSQL(Date sqlDate) {
+        try {
+            // Format de sortie désiré
+            SimpleDateFormat outputFormat = new SimpleDateFormat("EEE, MMMM dd 'TH' yyyy");
+
+            // Conversion de la date SQL en objet Date
+            Date date = new Date(sqlDate.getTime());
+            // Formatage de la date selon le format de sortie
+            String formattedDate = outputFormat.format(date);
+
+            return formattedDate;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Error formatting date";
+        }
+    }
+%>
 
 <%
-
-
     if(session.getAttribute("login") != null){
         String login = session.getAttribute("login").toString();
-
     }else{
-        response.sendRedirect("authentication.jsp");
+        try {
+            response.sendRedirect("authentication.jsp");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 %>
 <!DOCTYPE html>
@@ -117,41 +134,40 @@
 </div>
 
 <img style="z-index: -1000; width: 1300px; height: 800px; position: absolute; top: 0; left: 0;" src="images/bg-GOT.jpg">
-<section class="home">
-    <div style="position: absolute; top:250px; left: 37px;"  class="container rounded">
-        <table style="width: 107%; background: rgba(12,14,18,0.78)" class="table table-striped rounded">
-            <thead style="padding: 10px">
-            <tr>
-                <th style="padding-left: 20px; border-top-left-radius: 10px">Reservation ID</th>
-                <th>Film ID</th>
-                <th>User ID</th>
-                <th>User Name</th>
-                <th>User Email</th>
-                <th>Date Reservation</th>
-                <th>Time Reservation</th>
-                <th style="border-top-right-radius: 10px">Actions</th> <!-- J'ai changé le nom de la colonne pour inclure les actions -->
-            </tr>
-            </thead>
-            <tbody style="padding: 10px">
-            <c:forEach var="reservation" items="${arrayReservation}">
-                <tr>
-                    <td style="padding-left: 20px">${reservation.getIdReservation()}</td>
-                    <td>${reservation.getIdUser()}</td>
-                    <td>${reservation.getIdFilm()}</td>
-                    <td>${reservation.getUserName()}</td>
-                    <td>${reservation.getUserMail()}</td>
-                    <td>${reservation.getDateReservation()}</td>
-                    <td>${reservation.getTimeReservation()}</td>
-                    <td>
-                        <a href="reservation-ticket?reservationId=${reservation.getIdReservation()}" style="background: red; padding: 10px 20px; height: 20px; width: 50px;" role="button">Ticket</a>
-                    </td>
-                </tr>
+    <section style="margin-top: -120px;" class="home">
+
+        <div class="container">
+            <h1 class="upcomming">Your reservation's history</h1>
+            <c:forEach var="reservation" items="${arrayReservation}" varStatus="loop">
+                <div class="item">
+                    <div class="item-right">
+                        <span class="up-border"></span>
+                        <span class="down-border"></span>
+                        <h1 style="padding-top: 13px; font-size: 50px;">#${loop.index + 1}</h1>
+                    </div> <!-- end item-right -->
+
+                    <div class="item-left">
+                        <div class="info">
+                            <p style="margin: 0;" class="text-dark">
+                                <span style="font-weight: bold;">Date :</span>${reservation.getDateReservation()}</p>
+                            <p style="margin: 0;" class="text-dark"><span style="font-weight: bold;">Time :</span> ${reservation.getTimeReservation()}</p>
+                        </div>
+                        <div class="barcode">
+                            <img style="height: 60px;" src="images/barcode.png" alt="">
+                            <p style="margin: 0;" class="text-dark">${reservation.getQrCodeBillet()}</p>
+                        </div>
+                        <button class="tickets">
+                            <a href="reservation-ticket?reservationId=${reservation.getIdReservation()}" class="rounded-pill Reservation" style="height: 35px; width: 35px; background-color: #cb1111;">
+                                <i style="padding: 9px;"  class='bx bxs-coupon' style='color:#ffffff'></i>
+                            </a>
+                        </button>
+                    </div> <!-- end item-right -->
+                </div> <!-- end item -->
             </c:forEach>
-            </tbody>
-        </table>
 
-    </div>
 
+        </div>
+    </section>
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

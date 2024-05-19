@@ -2,6 +2,7 @@ package db.hibernate.config;
 
 
 
+import jee.javapack.beans.Reservation;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 

@@ -1,6 +1,7 @@
 package jee.javapack.filter;
 
-import jee.javapack.dao.UserDAOImpl;
+import db.hibernate.dao.HibernateDAO;
+import db.hibernate.dao.HibernateDAOImpl;
 import jee.javapack.dto.UserDTO;
 
 import javax.servlet.*;
@@ -24,10 +25,10 @@ public class ServletFilter implements Filter {
         HttpSession session = ((HttpServletRequest) request).getSession();
         String login = request.getParameter("login");
         String password = request.getParameter("pwd");
-        UserDAOImpl userDAO = new UserDAOImpl();
+        HibernateDAO hibernateDAO = new  HibernateDAOImpl();
         UserDTO user = null;
         try {
-            user = userDAO.authenticate(login, password);
+            user = hibernateDAO.authenticate(login, password);
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

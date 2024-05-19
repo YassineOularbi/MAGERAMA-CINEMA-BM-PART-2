@@ -1,19 +1,17 @@
 package jee.javapack.dto;
 
 
+import jee.javapack.beans.User;
 
 public class UserDTO {
     private Integer id;
     private String userName;
     private String roleAU;
 
-    public UserDTO(Integer id, String userName, String roleAU) {
-        this.id = id;
-        this.userName = userName;
-        this.roleAU = roleAU;
-    }
-
-    public UserDTO() {
+    public UserDTO(User user) {
+        this.id = user.getId();
+        this.userName = user.getUserName();
+        this.roleAU = user.getRoleAU();
     }
 
     public Integer getId() {

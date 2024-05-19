@@ -2,38 +2,33 @@ package jee.javapack.servlets;
 
 import db.hibernate.dao.HibernateDAO;
 import db.hibernate.dao.HibernateDAOImpl;
-import jee.javapack.beans.Comment;
 import jee.javapack.beans.Film;
-import jee.javapack.dao.CommentDAO;
-import jee.javapack.dao.CommentDAOImpl;
+import jee.javapack.beans.Reaction;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.SQLException;
 
-@WebServlet(name = "CommentServlet", value = "/CommentServlet")
-public class CommentServlet extends HttpServlet {
-    private final CommentDAO commentDAO = new CommentDAOImpl();
-
+@WebServlet(name = "ReactionServlet", value = "/ReactionServlet")
+public class ReactionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer idMovie = Integer.valueOf(request.getParameter("id"));
         HibernateDAO hibernateDAO = new HibernateDAOImpl();
+        HttpSession session = request.getSession();
         Film foundFilm = null;
         try {
             foundFilm = (Film) hibernateDAO.get(Film.class, idMovie);
             request.setAttribute("Movie", foundFilm);
-        } catch (InstantiationException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-
-        request.setAttribute("Movie", foundFilm);
-        HttpSession session = request.getSession();
-        try {
-            request.setAttribute("shows", hibernateDAO.show(Comment.class));
+            request.setAttribute("shows", hibernateDAO.show(Reaction.class));
             request.setAttribute("UserName", session.getAttribute("name").toString());
-        } catch (InstantiationException | IllegalAccessException e) {
+            request.setAttribute("average", hibernateDAO.loadRating(idMovie));
+            request.setAttribute("total", hibernateDAO.totalRating(idMovie));
+            request.setAttribute("RatingCount", hibernateDAO.getRatingCounts(idMovie));
+            request.setAttribute("shows", hibernateDAO.getReaction(idMovie));
+        } catch (InstantiationException | IllegalAccessException | SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
@@ -42,34 +37,25 @@ public class CommentServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-   HttpSession session = request.getSession();
-
+        HttpSession session = request.getSession();
         HibernateDAO hibernateDAO = new HibernateDAOImpl();
         Integer userId = (Integer) session.getAttribute("id");
         Integer filmId = Integer.valueOf(request.getParameter("filmId"));
-        String commentText = request.getParameter("commentText");
-        System.out.println(commentText);
-        System.out.println(userId);
-        System.out.println(filmId);
-        Comment comment = new Comment(userId, filmId, commentText);
-        try {
-            hibernateDAO.save(comment);
-            request.setAttribute("shows", hibernateDAO.show(Comment.class));
-            request.setAttribute("UserName", session.getAttribute("name").toString());
-        } catch (InstantiationException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-
-
+        Integer rating = Integer.valueOf(request.getParameter("rating"));
+        String commentText = request.getParameter("comment");
+        Reaction reaction = new Reaction(userId, filmId, commentText, rating);
         Film foundFilm = null;
         try {
+            hibernateDAO.save(reaction);
+            request.setAttribute("average", hibernateDAO.loadRating(filmId));
+            request.setAttribute("total", hibernateDAO.totalRating(filmId));
+            request.setAttribute("RatingCount", hibernateDAO.getRatingCounts(filmId));
             foundFilm = (Film) hibernateDAO.get(Film.class, filmId);
             request.setAttribute("Movie", foundFilm);
-        } catch (InstantiationException | IllegalAccessException e) {
+            request.setAttribute("shows", hibernateDAO.getReaction(filmId));
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         }
-
-
         this.getServletContext().getRequestDispatcher("/view.jsp").forward(request, response);
 
     }

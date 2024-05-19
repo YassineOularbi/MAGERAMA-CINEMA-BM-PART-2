@@ -3,14 +3,11 @@ package jee.javapack.servlets;
 import db.hibernate.dao.HibernateDAO;
 import db.hibernate.dao.HibernateDAOImpl;
 import jee.javapack.beans.Film;
-import jee.javapack.dao.FilmDAO;
-import jee.javapack.dao.FilmDAOImpl;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet(name = "DeleteFilm", value = "/DeleteFilm")
 public class DeleteFilm extends HttpServlet {

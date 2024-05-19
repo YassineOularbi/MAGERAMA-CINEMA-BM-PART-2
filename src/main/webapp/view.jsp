@@ -8,14 +8,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Film Rating and Commenting Platform</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <style><%@ include file="css/view.css"%></style>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maregara Cinema</title>
     <link rel="icon" href="images/logo.png">
     <!-- bootstrap css link -->
@@ -30,8 +27,9 @@
           integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
           crossorigin="anonymous" referrerpolicy="no-referrer">
     <!-- Css link -->
-
     <style><%@include file="css/style.css"%></style>
+    <style><%@include file="css/view.css"%></style>
+
     <!-- BOX ICONS  -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -85,14 +83,44 @@
     </div>
 </nav>
 
+<section class="movie-trend">
+    <img style="z-index: -1000; width: 1275px; position: absolute; top: -300px; left: 0;" src="images/bg5.jpg">
+    <div style="width: 70%; padding-top: 50px; padding-left: 120px; display: flex; flex-direction: row;"
+         class="text-white my-4">
+        <div style="display: flex; flex-direction: column">
+            <img style="height: 250px; width: 170px; margin: 10px 0;" class="card border-0"
+                 src="${Movie.getPictureURL()}" alt="">
+        </div>
+        <div style="margin-left: 20px;">
+            <h4 class="movieTitle" style="text-align: start; padding-top: 10px;">${Movie.getTitleFilm()}</h4>
+            <p style="font-size: 15px; text-align: start;">Genre : ${Movie.getGenreFilm()}</p>
+            <p style="font-size: 11px; text-align: start;">${Movie.getRunTimeFilm()} - <span>${Movie.getProducedIn()} - </span><span
+                    style="font-weight: bold;">${Movie.getDirectedBy()}</span></p>
+            <p style="font-size: 11px; text-align: start;"><span
+                    style='color:#fdb000; background: rgba(0, 0, 0, 0.6);' class="text-success rounded p-1">92%
+                        Match </span><span style='background: rgba(0, 0, 0, 0.6);' class="rounded p-1 mx-1">TV -
+                        MA</span><span style=' background: rgba(0, 0, 0, 0.6); font-weight: bold;'
+                                       class="rounded p-1 mx-1">HD</span><span style='color:#fdb000; background: rgba(0, 0, 0, 0.6);'
+                                                                               class="rounded p-1 mx-1">${Movie.getRatingFilm()} <i class='bx bxs-star' style='color:#fdb000'></i></span></p>
+            <p style="font-size: 15px; text-align: start;">${Movie.getDescriptionFilm()}</p>
+            <div class="buttons text-light">
+                <a  class="btn text-light mt-2">Add to playlist <i class='bx bxs-right-arrow'
+                                                                   style='color:#ffffff'></i></a>
+                <a href="reserve-now?id=${trendFilms.getIdFilm()}" class="btn btn-book text-light mt-2">Book Now <i class='bx bxs-coupon'
+                                                                                                                    style='color:#ffffff'></i></a>
+            </div>
+        </div>
+    </div>
+    </div>
 
+</section>
 <!-- video -->
 
 
-<div class="container mt-4">
+<div class="container" style="margin-top: -350px">
     <div class="flex flex-col justify-content-center align-items-center">
         <div class="flex flex-col gap-1 items-center mt-3">
-            <h1 class="text-shadow colored-text font-weight-bold text-white">${Movie.getTitleFilm()}</h1>
+            <h1 s class="font-weight-bold text-white m-5">${Movie.getTitleFilm()} | Official Trailer (${Movie.getDirectedBy()})</h1>
         </div>
     </div>
     <div class="flex flex-col justify-content-center align-items-center">
@@ -103,54 +131,53 @@
     <br>
     <!-- Description -->
     <div class="container">
-        <div id="ratingSection" class="container p-4 flex flex-col justify-content-center align-items-center">
-            <div class="star-rating d-flex justify-content-center gap-3 p-2">
-                <span class="fa fa-star-o display-10 disabled" data-rating="1"></span>
-                <span class="fa fa-star-o display-10 disabled" data-rating="2"></span>
-                <span class="fa fa-star-o display-10 disabled" data-rating="3"></span>
-                <span class="fa fa-star-o display-10 disabled" data-rating="4"></span>
-                <span class="fa fa-star-o display-10 disabled" data-rating="5"></span>
-                <input type="hidden" name="whatever1" class="rating-value" value="0">
+        <div class="app">
+            <div class="rating">
+                <div class="rating__average">
+                    <h1 class="average">${average}</h1>
+                    <div class="star-outer">
+                        <div class="star-inner"></div>
+                    </div>
+                    <p style="font-size: 20px;">${total}</p>
+                </div>
+                <div class="rating__progress">
+<c:forEach var="rating" items="${RatingCount}">
+                    <div class="rating__progress-value">
+                        <p>${rating.getRating()} <span class="star">&#9733;</span></p>
+                        <div class="progress">
+                            <div class="bar" style="width: ${rating.getPercent()}%;">
+                            </div>
+                        </div>
+                        <p>${rating.getCount()}</p>
+                    </div>
+</c:forEach>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+<section style="height: 600px; padding-left: 50px; position: absolute; top: 400px; width: 100%; z-index: -1000" class="movie-card-section">
 
-<!-- Rate the film -->
-<div id="ratingSection"
-     class="container mt-5 border-top p-4 gap-5 flex flex-col justify-content-center align-items-center">
-    <h2 class="text-start mb-4">Rate the film</h2>
-    <div class="star-rating d-flex justify-content-center gap-3 p-2">
-        <span class="fa fa-star-o display-5" data-rating="1"></span>
-        <span class="fa fa-star-o display-5" data-rating="2"></span>
-        <span class="fa fa-star-o display-5" data-rating="3"></span>
-        <span class="fa fa-star-o display-5" data-rating="4"></span>
-        <span class="fa fa-star-o display-5" data-rating="5"></span>
-        <input type="hidden" name="whatever1" class="rating-value" value="0">
+</section>
+<div class="comment-section animate__animated animate__fadeIn">
+    <form action="view-now" method="post">
+    <h2>Comments & Ratings</h2>
+    <div class="comments"></div>
+    <textarea name="comment" id="commentInput" placeholder="Add a comment..."></textarea>
+    <div class="rating">
+        <div class="stars" onclick="setRating(event)">
+            <span class="star" data-value="1">&#9733;</span>
+            <span class="star" data-value="2">&#9733;</span>
+            <span class="star" data-value="3">&#9733;</span>
+            <span class="star" data-value="4">&#9733;</span>
+            <span class="star" data-value="5">&#9733;</span>
+        </div>
     </div>
-</div>
-
-
-            <!-- Comment Form Section -->
-<div class="container d-flex flex-column align-items-center justify-content-center rounded-5 p-3 my-5"
-     style=" background-position: center; background-size: cover;">
-    <form class="col-lg-6" action="view-now" method="post">
-        <h2 class="text-center mb-3">Leave a Reply</h2>
-        <input type="hidden" name="filmId" value="${Movie.getIdFilm()}">
-        <div class="form-group">
-
-            <input type="hidden" class="form-control" id="nameInput" placeholder="Enter your name">
-        </div>
-        <div class="form-group mt-3">
-            <input type="hidden" class="form-control" id="emailInput" placeholder="Enter your email">
-        </div>
-        <div class="form-group mt-3">
-            <textarea class="form-control bg-dark" id="commentText" rows="3" placeholder="Your comment" name="commentText"></textarea>
-        </div>
-        <button type="submit" class="btn btn-dark mt-3" id="submitButton">Post comment</button>
+    <input class="rated" type="hidden" name="rating" value="">
+    <input type="hidden" name="filmId" value="${Movie.getIdFilm()}">
+    <button class="btn btn-danger" type="submit">Add Comment ></button>
     </form>
-
 </div>
 
 <%-- exlkdnjkelzjfnrkejfn --%>
@@ -159,35 +186,17 @@
 
     <div class="row  d-flex justify-content-center">
 
-        <div class="col-md-8">
-
-            <div class="headings d-flex justify-content-between align-items-center mb-3">
-                <h5 style="color: white">Unread comments(6)</h5>
-
-                <div class="buttons">
-
-                            <span class="badge bg-black d-flex flex-row align-items-center">
-                                <span class="text-danger">Comments "ON"</span>
-                                <div class="form-check form-switch">
-                                  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-
-                                </div>
-                            </span>
-
-                </div>
-
-            </div>
-
+        <div class="">
 
             <c:forEach var="show" items="${shows}">
-                <div class="card p-3  bg-dark">
+                <div class="card p-3  bg-dark my-4">
 
                     <div class="d-flex justify-content-between align-items-center">
 
                         <div class="user d-flex flex-row align-items-center">
 
                             <img src="https://i.imgur.com/hczKIze.jpg" width="30" class="user-img rounded-circle mr-2">
-                            <span><small class="font-weight-bold text-danger" style="padding-left: 10px;">${UserName}</small> <br><small class="font-weight-bold text-white  " style="padding-left: 20px">${show.getCommentText()}</small></span>
+                            <span style="margin-left: 25px"><small class="font-weight-bold text-danger" style="font-size: 25px">${show.getUserName()}</small> <br><small class="font-weight-bold text-white  " style="">${show.getCommentText()}</small></span>
 
                         </div>
 
@@ -208,9 +217,9 @@
 
                         </div>
 
-                        <div class="icons align-items-center">
-
+                        <div style="width: 120px;display: flex;gap: 10px;" class="icons align-items-center">
                             <i class="fa fa-star text-warning"></i>
+                            <p style="color: gold; font-size: 15px;">${show.getRating()}</p>
                             <i class="fa fa-check-circle-o check-icon"></i>
 
                         </div>
@@ -225,37 +234,35 @@
         </div>
 
 
+        <script>
+            let rating_average = document.querySelector(".average").textContent;
+            document.querySelector(".star-inner").style.width = (rating_average / 5) * 100 + "%";
 
 
 
 
+            function setRating(event) {
+                const star = event.target;
+                const value = parseInt(star.getAttribute("data-value"));
 
+                document.querySelector(".rated").value = value;
 
-    <%--
-<div class="container mt-5">
-    <h1 class="text-dark mb-4">Recent Comments</h1>
-    <c:forEach var="show" items="${shows}">
-        <div class="row align-items-center gap-2  border-top">
-            <div class="col-md-2 d-flex align-items-center ">
-                <img src="img/user.jpg" class="img-fluid" alt="User Image" width="30px" height="30px">
-                <h5>${UserName}</h5>
-            </div>
-            <div class="col-md-6">
-                <p class="mt-2">${show.getCommentText()}</p>
-            </div>
-        </div><br>
+                const stars = document.querySelectorAll(".star");
+                stars.forEach((s) => {
+                    const starValue = parseInt(s.getAttribute("data-value"));
+                    if (starValue <= value) {
+                        s.classList.add("active");
+                    } else {
+                        s.classList.remove("active");
+                    }
+                });
+            }
+        </script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+                crossorigin="anonymous"></script>
 
-    </c:forEach>
-
-</div>
-
---%>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-
-<script><%@ include file="js/view.js"%></script>
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 package jee.javapack.servlets;
 
-import jee.javapack.dao.ReservationDAO;
-import jee.javapack.dao.ReservationDAOImpl;
+import db.hibernate.dao.HibernateDAO;
+import db.hibernate.dao.HibernateDAOImpl;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -13,16 +13,10 @@ import java.sql.SQLException;
 public class ReservationTicket extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ReservationDAO reservationDAO = new ReservationDAOImpl();
+        HibernateDAO hibernateDAO = new HibernateDAOImpl();
         Integer reservationId = Integer.valueOf(request.getParameter("reservationId"));
-        System.out.println(reservationId);
         try {
-            System.out.println(reservationDAO.getUserTicket(reservationId));
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            request.setAttribute("ticket", reservationDAO.getUserTicket(reservationId));
+            request.setAttribute("ticket", hibernateDAO.getUserTicket(reservationId));
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
