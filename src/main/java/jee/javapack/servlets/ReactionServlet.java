@@ -11,9 +11,12 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
+
 @WebServlet(name = "ReactionServlet", value = "/ReactionServlet")
 public class ReactionServlet extends HttpServlet {
-    @Override
+
+
+   @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer idMovie = Integer.valueOf(request.getParameter("id"));
         HibernateDAO hibernateDAO = new HibernateDAOImpl();

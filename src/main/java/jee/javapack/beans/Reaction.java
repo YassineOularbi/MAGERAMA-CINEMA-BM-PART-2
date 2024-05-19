@@ -17,7 +17,6 @@ public class Reaction {
     public Reaction() {
 
     }
-
     public Reaction(Integer idUser, Integer idFilm, String commentText,Integer rating) {
         this.idUser = idUser;
         this.idFilm = idFilm;
@@ -75,5 +74,5 @@ public class Reaction {
                 ", rating=" + rating +
                 '}';
     }
-
 }
+
