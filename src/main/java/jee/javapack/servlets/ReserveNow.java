@@ -77,7 +77,7 @@ public class ReserveNow extends HttpServlet {
         request.setAttribute("qrcode", qrCode);
         this.getServletContext().getRequestDispatcher("/ReservationTicket.jsp").forward(request, response);
     }
-    public ArrayList<DateModel> convertDate (String dateData){
+    public static ArrayList<DateModel> convertDate(String dateData){
         String[] dates = dateData.split(" ");
         ArrayList<DateModel> outputDates = new ArrayList<>();
         for (String date : dates) {

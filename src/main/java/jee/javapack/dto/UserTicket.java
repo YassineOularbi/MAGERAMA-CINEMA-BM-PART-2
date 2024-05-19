@@ -1,8 +1,10 @@
 package jee.javapack.dto;
 
+import javax.persistence.Entity;
 import java.sql.Time;
 import java.util.Date;
 
+@Entity
 public class UserTicket {
     private String titleFilm;
     private String backgroundURL;
@@ -24,6 +26,10 @@ public class UserTicket {
         this.seatPlace = seatPlace;
         this.experienceType = experienceType;
         this.offerBillet = offerBillet;
+    }
+
+    public UserTicket() {
+
     }
 
     public String getTitleFilm() {

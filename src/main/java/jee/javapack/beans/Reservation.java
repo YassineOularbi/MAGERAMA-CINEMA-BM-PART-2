@@ -1,9 +1,6 @@
 package jee.javapack.beans;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
 
@@ -20,7 +17,6 @@ public class Reservation {
     private String offerBillet;
     private Date dateReservation;
     private Time timeReservation;
-
 
     public Reservation(Integer idReservation, Integer idUser, Integer idFilm, String qrCodeBillet, String seatPlace, String ExperienceType, String offerBillet, Date dateReservation, Time timeReservation) {
         this.idReservation = idReservation;

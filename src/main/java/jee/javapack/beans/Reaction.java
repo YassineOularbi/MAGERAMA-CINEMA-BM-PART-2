@@ -4,23 +4,20 @@ package jee.javapack.beans;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "commentfilm")
-public class Comment {
+public class Reaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idComment;
-    @Column(name = "id")
     private Integer idUser;
     private Integer idFilm;
     private String commentText;
     private Integer rating;
 
 
-    public Comment() {
+    public Reaction() {
 
     }
-
-    public Comment(int idUser, int idFilm, String commentText,Integer rating) {
+    public Reaction(Integer idUser, Integer idFilm, String commentText,Integer rating) {
         this.idUser = idUser;
         this.idFilm = idFilm;
         this.commentText = commentText;
@@ -77,5 +74,5 @@ public class Comment {
                 ", rating=" + rating +
                 '}';
     }
-
 }
+

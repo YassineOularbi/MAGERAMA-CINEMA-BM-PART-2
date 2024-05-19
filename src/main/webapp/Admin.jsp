@@ -1,5 +1,4 @@
 <%@ page import="jee.javapack.beans.Film" %>
-<%@ page import="jee.javapack.dao.FilmDAOImpl" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.

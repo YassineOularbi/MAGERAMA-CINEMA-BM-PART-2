@@ -87,11 +87,11 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>CommentServlet</servlet-name>
-        <servlet-class>jee.javapack.servlets.CommentServlet</servlet-class>
+        <servlet-name>ReactionServlet</servlet-name>
+        <servlet-class>jee.javapack.servlets.ReactionServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>CommentServlet</servlet-name>
+        <servlet-name>ReactionServlet</servlet-name>
         <url-pattern>/view-now</url-pattern>
     </servlet-mapping>
 

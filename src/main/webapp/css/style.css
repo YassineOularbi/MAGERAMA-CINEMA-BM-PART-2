@@ -43,6 +43,16 @@ nav{
     text-align: center;
     align-content: center;
 }
+.activeFilm{
+    border-bottom: 2px solid red;
+    padding: 7px;
+}
+.showingNow{
+    display: none;
+}
+.comingSoon{
+    display: none;
+}
 .get-started{
     display: flex;
     justify-content: center;
@@ -74,6 +84,12 @@ nav{
     height: 720px;
 }
 .buttons button{
+    background: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+}
+.buttons a{
     background: rgba(0, 0, 0, 0.6);
     text-align: center;
     align-items: center;
@@ -836,5 +852,211 @@ input[type="date"]::-webkit-calendar-picker {
 .right .ticket-number {
     color: gray;
 }
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
 
+.cardUser {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.5);
+    max-width: 500px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 25px;
+    position: relative;
+}
+.cardUser h2 {
+    margin: 0;
+    padding: 0 1rem;
+}
+.cardUser .title {
+    padding: 1rem;
+    text-align: right;
+    color: rgb(77, 1, 1);
+    font-weight: bold;
+    font-size: 12px;
+}
+.cardUser .desc {
+    padding: 0.5rem 1rem;
+    font-size: 12px;
+}
+.cardUser .actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    padding: 0.5rem 1rem;
+}
+.cardUser svg {
+    width: 85px;
+    height: 85px;
+    margin: 0 auto;
+}
 
+.img-avatar {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    border-radius: 50%;
+    border: 6px solid white;
+    background-image: linear-gradient(-60deg, rgba(227, 1, 1, 0.78) 0%, rgba(77, 1, 1, 0.78) 100%);
+    top: 15px;
+    left: 125px;
+}
+
+.card-text {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.title-total {
+    padding: 0.5em 0.5em 1em 2.5em;
+}
+
+path {
+    fill: white;
+}
+
+.img-portada {
+    width: 100%;
+}
+
+.portada {
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-image: url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTAyL3Jhd3BpeGVsX29mZmljZV8yNF9waG90b19vZl9hX3RoZWF0cmVfZHJlYW1zY2FwZXNfd2FsbHBhcGVyX2ZvZ181YWM4MDY2MS0zZWFmLTRiNGQtYWZhMy1hNzBlOTM3ZTNiMTJfMS5qcGc.jpg");
+    background-position: bottom center;
+    background-size: cover;
+}
+
+button {
+    border: none;
+    background: none;
+    font-size: 24px;
+    color: #8bc34a;
+    cursor: pointer;
+    transition:.5s;
+    &:hover{
+        color: #4CAF50  ;
+        transform: rotate(22deg)
+    }
+}
+.actions a {
+    box-shadow: 0 0 0 5px rgba(77, 1, 1, 0);
+    position: relative;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.actions .Logout::before {
+    text-align: center;
+    content: "Log out";
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    opacity: 0;
+    font-size: 14px;
+    transition: opacity 0.3s ease-in-out;
+    width: 70px;
+}
+
+.actions .Reservation::before {
+    text-align: center;
+    content: "Reservation";
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    opacity: 0;
+    font-size: 14px;
+    transition: opacity 0.3s ease-in-out;
+    width: 70px;
+}
+
+.actions .Playlist::before {
+    text-align: center;
+    content: "My Playlist";
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    opacity: 0;
+    font-size: 14px;
+    transition: opacity 0.3s ease-in-out;
+    width: 70px;
+}
+
+.actions a:hover {
+    box-shadow: 0 0 0 5px rgba(77, 1, 1, 0.5);
+}
+
+.actions a:hover::before {
+    opacity: 1;
+}
+  .upcomming {
+    font-size: 45px;
+    text-transform: uppercase;
+    border-left: 14px solid rgba(129, 12, 12, 0.78);
+    padding-left: 12px;
+    margin: 18px 8px;
+    color: white;
+    text-align: start;
+  }
+  .container .item {
+    width: 98%;
+    height: 10%;
+    float: left;
+    padding: 0 20px;
+    background: #fff;
+    overflow: hidden;
+    margin: 10px;
+    border-radius: 20px;
+  }
+  .container .item-right, .container .item-left {
+    float: left;
+    padding: 10px 
+  }
+  .container .item-right {
+    margin-right: 20px;
+    width: 25%;
+    position: relative;
+  }
+  .container .item-right .up-border, .container .item-right .down-border {
+      padding: 14px 15px;
+      background-color: #ddd;
+      border-radius: 50%;
+      position: absolute
+  }
+  .container .item-right .up-border {
+    top: -15px;
+    right: -35px;
+  }
+  .container .item-right .down-border {
+    bottom: -15px;
+    right: -35px;
+  }
+
+  .container .item-left {
+    width: 71%;
+    border-left: 3px dotted #999;
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+  } 
+  .container .item-left .info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding-left: 20px;
+    align-items: flex-start;
+    height: 90px;
+  }
+  .tickets a{
+    box-shadow: 0 0 0 5px rgba(130, 3, 3, 0.326);
+  }
